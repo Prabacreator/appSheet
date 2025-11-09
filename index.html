@@ -87,7 +87,7 @@
         <div id="timestamp" class="float-md-end mb-3" style="font-size:0.75rem"></div>
       </div>
       <div class="fw-bold person text-start p-2"></div>
-      <table class="table table-sm"></table>
+      <table style="font-size:0.5rem"></table>
     </div>
     <div class="text-end m-2">
       <button type="submit" form="add" class="btn btn-sm btn-outline-dark shadow" onclick="printPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>  cetak PDF</button>
@@ -254,12 +254,12 @@ function getTable(data){
   
   var thead = document.createElement('thead');
   thead.innerHTML = `
-  <tr style="font-size:0.5rem">
+  <tr>
     <th rowspan="2">No</th>
     <th rowspan="2">tanggal</th>
     <th colspan="2">status</th>
     <th colspan="3">upah (gaji)</th>
-  </tr><tr style="font-size:0.3rem">
+  </tr><tr>
     <th>bekerja</th>
     <th>lembur</th>
     <th>perhari</th>
@@ -271,7 +271,7 @@ function getTable(data){
 
     var tbody = document.createElement('tbody');
     tbody.innerHTML = ` 
-    <tr style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};font-size:0.5rem;">
+    <tr style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''}">
       <th class="text-center" onclick="setData(${idx})">${idx + 1}</th>
       <td class="text-center" onclick="getDay(${idx}, '${item.name}')">${item.date}</td>
       <td class="text-center"><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''} ></td>
@@ -284,7 +284,7 @@ function getTable(data){
   });
   var tfoot = document.createElement('tfoot');
   tfoot.innerHTML = `
-    <tr class="text-center" style="font-size:0.5rem">
+    <tr class="text-center">
       <th colspan="2"></th>
       <th>${data.filter(item => item.work > 0).length}</th>
       <th>${data.filter(item => item.over > 0).length}</th>
