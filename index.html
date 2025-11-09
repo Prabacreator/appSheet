@@ -1,228 +1,331 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- style  css -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/sweetalert.min.css">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- css andc js bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/sweetalert.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/sweetalert.min.js"></script>
+  
 <style>
-root{
-  --bs-primary:#0d6efd;
-  --bs-secondary:#6c757d;
-  --bs-success:#198754;
-  --bs-info:#0dcaf0;
-  --bs-warning:#ffc107;
-  --bs-danger:#dc3545;
-  --bs-light:#f8f9fa;
-  --bs-dark:#212529;
-}
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
-body {
-	font-weight: 300 !important;
-	background-image: url(img/praba.jpg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-}
-@media (min-width: 768px) {
-  .container-xl {	
-  	max-width: 420px;
+  body {
+  	font-weight: 300 !important;
+  	background-image: url(img/praba.jpg);
+  	background-size: cover;
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
   }
-}
-.transparent{
-  color: #f8f9fa;
-  background-color: transparent;
-}
-table{
-  width: 100%;
-  border-collapse: collapse;
-}
-table th, td{
-  font-size: 0.7rem;
-  padding: 0.2rem 0.3rem;
-  border: 0.5px solid#f8f9fa;
-}
-#tbody:hover{
-  font-size: 1rem;
-  background: #6c757d;
-}
-#tfoot th{
-  border: none;
-}
-
+  @media (min-width: 768px) {
+    .container {	
+    	max-width: 420px;
+    }
+  }
+  .container{
+    max-width: 41em;
+  }
+  .transparent{
+    color: #f8f9fa;
+    background-color: transparent;
+  }
+  .form-control,.fw-bold,.btn{
+    text-transform: capitalize;
+  }
+  .disabled {
+    color: #0d6efd;
+    border: none;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  table{
+    width: 100%; 
+    border-collapse: collapse; 
+    text-transform: capitalize;
+  }
+  table th, td{
+    padding: 0.2rem 0.5rem;
+  }
+  thead th{
+    text-align: center;
+    vertical-align: middle;
+    border: 0.5px solid#ccc;
+  }
+  tbody th,td{
+    vertical-align: middle;
+    border: 0.5px solid#ccc;
+  }
+  tbody tr:hover{
+    color: #f00;
+    background-color: #ccc;
+  }
+  tfoot th{
+    padding-top: 1rem;
+  }
 </style>
 </head>
-<body class="text-bg-dark" onload="showName()">
-  <div class="container d-flex justify-content-center flex-column text-capitalize w-100 h-100">
-    <header class="mb-auto">
-  	  <div class="row mt-2 fw-bold border-bottom">
-  	    <div class="col fs-4">
-  	        data absensi
-  	    </div>
-  	    <div class="col timestamp text-end" style="font-size:0.5rem"></div>
-  	  </div>
-  	  <ol class="list-group list-group-numbered" style="font-size:0.7rem"></ol>
-    </header>
-  	<main class="m-auto">
-  	  <div class="table-responsive my-2"></div>
-  	</main>
-  	<footer class="mt-auto text-end py-2">
-  	  <button type="button" class="btn btn-sm btn-success" onclick="addData()" style="font-size:0.5rem">
-  	    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="17px" fill="currentColor"><path d="M480-240Zm-320 80v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q37 0 73 4.5t72 14.5l-67 68q-20-3-39-5t-39-2q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32h240v80H160Zm400 40v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T903-340L683-120H560Zm300-263-37-37 37 37ZM620-180h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19ZM480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Z"/></svg>
-  	      Tambah Data
-  	  </button>
-  	</footer>
-  </div>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/sweetalert.min.js"></script>
-<script>
-var scriptUrl = 'https://script.google.com/macros/s/AKfycbySfEt9wVvZl3uHy5eYFiqOj0yy_LqWzNU1dqzyQhAWQFFgPLO40533HrBE54mpkA_7/exec';
-
-document.querySelector('.timestamp').textContent = new Date().toLocaleString('id-ID', { weekday: 'long' }) +' , '+ new Date().getDate() +' '+ new Date().toLocaleString('id-ID', { month: 'long' }) +' '+ new Date().getFullYear();
-
-Swal.fire({
-  title: 'Loading...',
-  text: 'Please wait',
-  allowOutsideClick: false,
-  showConfirmButton: false,
-  willOpen: () => {
-    Swal.showLoading();
-  }
-});
-
-function showName(){
-  var listGroup = document.querySelector('.list-group');
-  fetch(scriptUrl)
-  .then(response => response.json())
-  .then(data => {
-    listGroup.innerHTML ='';
-    data.workers.forEach((row)=> {
-      var listGroupItem = document.createElement('li');
-      listGroupItem.className = 'list-group-item d-flex justify-content-between align-items-start transparent border-0';
-      listGroupItem.innerHTML =`
-      <div class="ms-2 me-auto">
-        <div class="fw-bold">${row.workername}</div>
-        ${row.timestamp}
+<body>
+<div class="container d-flex flex-column justyfy-content-center w-100 h-100 py-2">
+  <header class="mb-auto">
+    <ol class="list-group list-group-numbered d-print-none"></ol>
+  </header>
+  
+  <main class="transparent p-2 rounded border">
+    <div class="d-flex justify-content-between align-items-start mt-2">
+      <h1 class="fw-bold border-bottom pb-2">daily job info</h1>
+      <div id="timestamp" class="text-end me-2" style="font-size:0.75rem"></div>
+    </div>
+    <div class="fw-bold person d-flex justify-content-between align-items-start"></div>
+    <div class="table-responsive">
+      <table class="transparent my-2"></table>
+      <div class="text-end">
+        <svg class="d-print-none" onclick="window.print()" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
       </div>
-      <span class="badge text-bg-success rounded-pill" onclick="srcData(['${row.workername}'])">
-      <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-240 240-480l56-56 144 144v-368h80v368l144-144 56 56-240 240Z"/></svg>
-      </span>`;
-      listGroup.appendChild(listGroupItem);
-    });
-    Swal.close();
-  })
-  .catch(error => Swal.close())
+    </div>
+  </main>
+  
+  <footer class="mt-auto">
+    <div class="text-center d-print-none mb-2">
+      <svg onclick="toggleModal('myModal','show')" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px" viewBox="0 -960 960 960" fill="#f8f9fa"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
+    </div>
+  </footer>
+</div>
+  <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <form id="add" onsubmit="addData()" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold">Add Data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-3">
+          <input type="text" id="date" name="date" class="form-control form-control-sm text-center border-0" required>
+          <div class="row">
+            <div class="col">
+              <label for="">Name</label>
+              <input type="text" id="name" name="name" class="form-control form-control-sm" onclick="empty('name')" list="listname" required><datalist id="listname" ></datalist>
+            </div>
+            <div class="col py-2">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="work">
+                <label class="form-check-label" for="">Worked</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="over">
+                <label class="form-check-label" for="">Overtime</label>
+              </div>
+            </div>
+          </div>
+          <h5 class="fw-bold">Salary</h5>
+          <div class="row">
+            <div class="col-3 offset-1">
+              <label class=" mb-1" for="">Daily</label>
+              <label class=" mb-1" for="">Cash</label>
+              <label class=" mb-1" for="">Debt</label>
+            </div>
+            <div class="col-8">
+              <input type="number" id="daily" name="daily" class="form-control form-control-sm text-center mb-1" onclick="empty('daily')" value="0" list="cashday"/><datalist id="cashday"></datalist>
+              <input type="number" id="cash" name="cash" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('cash')">
+              <input type="number" id="debt" name="debt" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('debt')">
+            </div>
+          </div>
+          <label for="">Description</label>
+          <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')" ></textarea>
+        </div>
+        <div class="modal-footer">
+          <button id="del" type="reset" class="btn btn-sm btn-danger">Delete</button>
+          <button type="submit" form="add" class="btn btn-sm btn-dark">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+<script>
+var dataStorage = JSON.parse(localStorage.getItem('dataStorage')) || [];
+var editStorage = null;
+document.querySelector('#timestamp').textContent = new Date().toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+
+function toggleModal(id, action, name) {
+  var modal = action === 'show' ? new bootstrap.Modal(document.getElementById(id)) : bootstrap.Modal.getInstance(document.getElementById(id));
+  if(action === 'show'){
+    modal.show();
+    document.getElementById('date').value = new Date().toLocaleString('id-ID',{day:'2-digit',month:'2-digit',year:'numeric'}).replace(/\//g, '-');
+  } else if(action === 'hide'){
+    modal.hide();
+    document.getElementById('add').reset();
+  } else if(name){
+    document.getElementById('name').value = name;
+  }
 }
 
-function srcData(keyword){
-  Swal.fire({
-    title: 'Loading...',
-    text: 'Please wait',
-    allowOutsideClick: false,
-    showConfirmButton: false,
-    willOpen: () => {
-      Swal.showLoading();
-    }
-  });
-  let div = document.querySelector(".table-responsive");
-  fetch(`${scriptUrl}?keyword=${keyword}`).then(response => response.json()).then(data => {
-    div.innerHTML = "";
-    let title = document.createElement("div");
-    title.className ='row';
-    title.innerHTML =`
-    <div class="col fs-2 fw-bold">${keyword}</div>
-    <div class="col text-end">
-    <button type="button" class="btn btn-sm btn-success"  onclick="addData(['${keyword}'])" style="font-size:0.5rem">
-  	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="17px" fill="currentColor"><path d="M167-120q-21 5-36.5-10.5T120-167l40-191 198 198-191 40Zm191-40L160-358l458-458q23-23 57-23t57 23l84 84q23 23 23 57t-23 57L358-160Zm317-600L261-346l85 85 414-414-85-85Z"/></svg>
-  	 Tambah Absen</button></div>`;
-    div.appendChild(title);
-    let table = document.createElement("table");
-    table.className = 'transparent font-monospace'
-    let thead = table.insertRow();
-    thead.id = 'thead';
-    thead.innerHTML =`
-    <th>No</th>
-    <th>Tanggal</th>
-    <th>Absen</th>
-    <th>Kasbon</th>`;
-    let totals = 0;
-    data.presences.forEach((row, index)=> {
-      let tbody = table.insertRow();
-      tbody.id = 'tbody';
-      tbody.innerHTML =`
-      <th>${index+1}</th>
-      <td>${row.timestamp}</td>
-      <td class="text-center">${row.presence}</td>
-      <td class="text-end">${row.cashreceipt}</td>`;
-      totals += parseFloat(row.cashreceipt);
-    });
-    let tfoot = table.insertRow();
-    tfoot.id = 'tfoot';
-    tfoot.innerHTML =`
-    <th colspan="5" class="text-end">${totals}</th>`;
-    div.appendChild(table);
-    Swal.close();
-  }).catch(error => Swal.close());
+function empty(id){
+  document.getElementById(id).value = null;
 }
 
-function addData(key){
-  Swal.fire({
-    title: 'Add Present',
-    html: `
-    <div class="text-start">
-    <label>Nama</label>
-    <input type="text" id="workername" class="form-control" value="${key ? key[0] : ''}">
-    <div class="row mt-3">
-    <div class="col">
-    <label>Absen</label>
-    <select id="presence" class="form-control text-center">
-    <option>Y</option>
-    <option>N</option>
-    </select>
-    </div><div class="col">
-    <label>Kasbon</label>
-    <input type="number" id="cashreceipt" class="form-control text-center" value="0" onclick="document.querySelector('#cashreceipt').value=null">
-    </div></div></div>`,
-    focusConfirm: false,
-    showCancelButton: true,
-    confirmButtonText: 'Simpan',
-    confirmButtonColor: '#198754',
-    cancelButtonText: 'Batal',
-    preConfirm: () => {
-      return {
-        timestamp: new Date().toLocaleString('id-ID',{ weekday:'long'})+', '+new Date().toLocaleString('id-ID'),
-        workername: document.getElementById('workername').value,
-        presence: document.getElementById('presence').value,
-        cashreceipt: document.getElementById('cashreceipt').value
-      }
-    }
-  }).then((result) => {
-    if (result.value) {
-      Swal.fire({
-        title: 'Loading...',
-        text: 'Please wait',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
-          Swal.showLoading();
-        }
-      });
-      fetch(scriptUrl, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `timestamp=${result.value.timestamp}&workername=${result.value.workername}&presence=${result.value.presence}&cashreceipt=${result.value.cashreceipt}`
-      })
-      .then(response => response.text())
-      .then(data => {
-        srcData(result.value.workername);
-        console.log(data);
-      })
-      .catch(error => console.error(error));
-    }
+function getList(){
+  var nameList = [];
+  var paysList = [];
+  var listgroup = document.querySelector('.list-group');
+  var listname = document.querySelector('#listname');
+  var cashday = document.querySelector('#cashday');
+  [listgroup,listname, cashday].forEach(element => {
+    element.innerHTML = '';
+  });
+  dataStorage.forEach((item, index) => {
+    if (!nameList.includes(item.name)) {
+      nameList.push(item.name);
+      var listDiv = document.createElement('li');
+      listDiv.className = 'list-group-item transparent';
+      listDiv.textContent = item.name;
+      listDiv.onclick =()=> getData(item.name);
+      listgroup.appendChild(listDiv);
+      
+      var one = document.createElement('option');
+      one.textContent = item.name;
+      listname.appendChild(one);
+    };
+    if (item.daily !== 0 && !paysList.includes(item.daily)) {
+      paysList.push(item.daily);
+      var two = document.createElement('option');
+      two.textContent = item.daily;
+      cashday.appendChild(two);
+    };
+  });
+}getList()
+
+function addData(){
+  var name = document.getElementById('name').value;
+  var date = document.getElementById('date').value;
+  var work = document.getElementById('work').checked;
+  var over = document.getElementById('over').checked;
+  var daily = parseFloat(document.getElementById('daily').value);
+  var cash = parseFloat(document.getElementById('cash').value);
+  var debt = parseFloat(document.getElementById('debt').value);
+  var desc = document.getElementById('desc').value;
+  var save = { name,date,work,over,daily,cash,debt,desc };
+  
+  if (editStorage === null) {
+    dataStorage.push(save);
+  } else {
+    dataStorage[editStorage] = save;
+    editStorage = null;
+  }
+  localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
+  toggleModal('myModal', 'hide');
+  getList();
+  getData(name);
+}
+
+function getData(name) {
+  var person = document.querySelector('.person');
+  person.innerHTML = '';
+  var data = dataStorage.filter(item => item.name === name);
+  person.innerHTML =`
+  <h5 class="fw-bold">${name}</h5>
+  <h5 class="d-print-none">Rp: ${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0)+data.reduce((sum, item) => sum + item.debt, 0))}</h5>`;
+  person.onclick =()=> getData(name);
+  return getTable(data);
+}
+
+function getDay(index, name) {
+  var person = document.querySelector('.person');
+  person.innerHTML = '';
+  var filteredData = dataStorage.filter(item => item.name === name);
+  var data = filteredData.slice(index, index + 7);
+  person.innerHTML =`
+  <h5 class="fw-bold" onclick="getData(${name})">${name}</h5>
+  <h5 class="d-print-none">Rp: ${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0)+data.reduce((sum, item) => sum + item.debt, 0))}</h5>`;
+  person.onclick =()=> getData(name);
+  return getTable(data);
+}
+
+function getTable(data){
+  var table = document.querySelector('table');
+  table.innerHTML = '';
+  
+  var thead = document.createElement('thead');
+  thead.innerHTML = `
+  <tr style="font-size:0.75rem">
+    <th rowspan="2">No</th>
+    <th rowspan="2">tanggal</th>
+    <th colspan="2">status</th>
+    <th colspan="3">upah (gaji)</th>
+  </tr><tr style="font-size:0.5rem">
+    <th>bekerja</th>
+    <th>lembur</th>
+    <th>perhari</th>
+    <th>dibayar</th>
+    <th>Kasbon</th>
+  </tr>`;
+  table.appendChild(thead);
+  data.forEach((item, idx) => {
+
+    var tbody = document.createElement('tbody');
+    tbody.innerHTML = ` 
+    <tr style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};font-size:0.75rem;" onclick="getDay(${idx}, '${item.name}')">
+      <th class="text-center" onclick="setData(${idx})">${idx + 1}</th>
+      <td class="text-center" style="font-size:0.5rem">${item.date}</td>
+      <td class="text-center"><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''} ></td>
+      <td class="text-center"><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''}></td>
+      <th class="text-end">${item.daily}</th>
+      <th class="text-end" style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};color: ${item.cash > 0 ? '#212529' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th>
+      <th class="text-end" style="background-color: ${item.debt > 0 ? '#f1aeb5' : ''};color: ${item.debt > 0 ? '#212529' : 'transparent'}" ${item.debt > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.debt}</th>
+    </tr>`;
+    table.appendChild(tbody);
+  });
+  var tfoot = document.createElement('tfoot');
+  tfoot.innerHTML = `
+    <tr class="text-center" style="font-size:0.75rem">
+      <th colspan="2"></th>
+      <th>${data.filter(item => item.work > 0).length}</th>
+      <th>${data.filter(item => item.over > 0).length}</th>
+      <th>${data.reduce((sum, item) => sum + item.daily, 0)}</th>
+      <th>${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0)+data.reduce((sum, item) => sum + item.debt, 0))}</th>
+      <th>${data.reduce((sum, item) => sum + item.debt, 0)}</th>
+    </tr>`;
+  table.appendChild(tfoot);
+}
+
+function getDay(index, name) {
+  var start = index;
+  var finish = index + 7;
+  var filteredData = dataStorage.filter(item => item.name === name);
+  var data = filteredData.slice(start, finish);
+  return getTable(data);
+}
+
+function getInfo(index){
+  Swal.fire({ text: index, showConfirmButton: true })
+}
+
+function setData(index) {
+  editStorage = index;
+  toggleModal('myModal', 'show');
+  var item = dataStorage[index];
+  document.getElementById('name').value = item.name;
+  document.getElementById('date').value = item.date;
+  document.getElementById('work').checked = item.work;
+  document.getElementById('over').checked = item.over;
+  document.getElementById('daily').value = item.daily;
+  document.getElementById('cash').value = item.cash;
+  document.getElementById('debt').value = item.debt;
+  document.getElementById('desc').value = item.desc;
+  document.querySelector('#del').addEventListener('click', function(){
+    delData(index);
+    getData(item.name);
   });
 }
+
+function delData(index) {
+  dataStorage.splice(index, 1);
+  localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
+  toggleModal('myModal', 'hide');
+  getList();
+}
+
 </script>
 </body>
 </html>
+
