@@ -11,6 +11,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/sweetalert.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   root{
     --bs-primary:#0d6efd;
@@ -334,7 +335,7 @@ function printPDF() {
   var main = document.querySelector('main');
   html2canvas(main).then(function(canvas) {
     var imgData = canvas.toDataURL('image/png');
-    var doc = new jsPDF('p', 'mm', 'a4');
+    var doc = new jspdf.jsPDF('p', 'mm', 'a4');
     doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
     if (confirm('Apakah Anda ingin menyimpan file PDF?')) {
       var blob = doc.output('blob');
