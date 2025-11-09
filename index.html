@@ -10,11 +10,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/sweetalert.min.js"></script>
-  
 <style>
+  root{
+    --bs-primary:#0d6efd;
+    --bs-secondary:#6c757d;
+    --bs-success:#198754;
+    --bs-info:#0dcaf0;
+    --bs-warning:#ffc107;
+    --bs-danger:#dc3545;
+    --bs-light:#f8f9fa;
+    --bs-dark:#212529;
+  }
   body {
   	font-weight: 300 !important;
-  	background-image: url(img/praba.jpg);
+  	background-imagecolor: rgba(0,0,0,175);
   	background-size: cover;
   	background-repeat: no-repeat;
   	background-attachment: fixed;
@@ -27,21 +36,17 @@
   .container{
     max-width: 41em;
   }
-  .transparent{
-    color: #f8f9fa;
-    background-color: transparent;
-  }
   .form-control,.fw-bold,.btn{
     text-transform: capitalize;
   }
-  .disabled {
-    color: #0d6efd;
-    border: none;
-    cursor: not-allowed;
-    pointer-events: none;
+  .logo{
+    width: 21px;
+    height: 21px;
+    border-radius: 50px;
+    box-shadow: 0 .05rem .5rem rgba(0, 0, 0, .5);
   }
   table{
-    width: 100%; 
+    width: 100%;
     border-collapse: collapse; 
     text-transform: capitalize;
   }
@@ -66,30 +71,29 @@
   }
 </style>
 </head>
-<body>
-<div class="container d-flex flex-column justyfy-content-center w-100 h-100 py-2">
+<body class="d-flex h-100 text-center text-bg-light">
+<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="mb-auto">
-    <ol class="list-group list-group-numbered d-print-none"></ol>
+    <ol class="list-group list-group-numbered shadow d-print-none p-2"></ol>
   </header>
   
-  <main class="transparent p-2 rounded border">
-    <div class="d-flex justify-content-between align-items-start mt-2">
-      <h1 class="fw-bold border-bottom pb-2">daily job info</h1>
-      <div id="timestamp" class="text-end me-2" style="font-size:0.75rem"></div>
+  <main class="text-bg-light px-auto rounded border shadow">
+    <div class="d-flex justify-content-between align-items-start p-2">
+      <h2 class="fw-bold float-md-start text-success border-bottom mb-0" style="text-shadow: 0 .05rem .5rem rgba(0, 0, 0, .5);"><img src="img/praba.jpg"  class="logo mb-1"/> job info</h2>
+      <div id="timestamp" class="float-md-end mb-3" style="font-size:0.75rem"></div>
     </div>
-    <div class="fw-bold person d-flex justify-content-between align-items-start"></div>
-    <div class="table-responsive">
-      <table class="transparent my-2"></table>
-      <div class="text-end">
-        <svg class="d-print-none" onclick="window.print()" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
-      </div>
+      
+    <div class="fw-bold person d-flex justify-content-between align-items-start p-2"></div>
+    <div class="table-responsive p-2">
+      <table></table>
+    </div>
+    <div class="text-end m-2">
+      <button type="submit" form="add" class="btn btn-sm btn-outline-dark d-print-none shadow" onclick="window.print()"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>  cetak PDF</button>
     </div>
   </main>
   
-  <footer class="mt-auto">
-    <div class="text-center d-print-none mb-2">
-      <svg onclick="toggleModal('myModal','show')" xmlns="http://www.w3.org/2000/svg" width="33px" height="33px" viewBox="0 -960 960 960" fill="#f8f9fa"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>
-    </div>
+  <footer class="mt-auto p-3">
+    <button type="submit" form="add" class="btn btn-sm btn-outline-dark d-print-none shadow" onclick="toggleModal('myModal','show')"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>  Tambah Data</button>
   </footer>
 </div>
   <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
@@ -177,7 +181,7 @@ function getList(){
     if (!nameList.includes(item.name)) {
       nameList.push(item.name);
       var listDiv = document.createElement('li');
-      listDiv.className = 'list-group-item transparent';
+      listDiv.className = 'list-group-item text-bg-light';
       listDiv.textContent = item.name;
       listDiv.onclick =()=> getData(item.name);
       listgroup.appendChild(listDiv);
@@ -264,12 +268,12 @@ function getTable(data){
 
     var tbody = document.createElement('tbody');
     tbody.innerHTML = ` 
-    <tr style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};font-size:0.75rem;" onclick="getDay(${idx}, '${item.name}')">
+    <tr style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};font-size:0.75rem;">
       <th class="text-center" onclick="setData(${idx})">${idx + 1}</th>
-      <td class="text-center" style="font-size:0.5rem">${item.date}</td>
+      <td class="text-center" onclick="getDay(${idx}, '${item.name}')">${item.date}</td>
       <td class="text-center"><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''} ></td>
-      <td class="text-center"><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''}></td>
-      <th class="text-end">${item.daily}</th>
+      <td class="text-center"><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''} ${item.over > 0 ? `onclick="getInfo('${item.desc}')"`: ''}></td>
+      <th class="text-end" style="color: ${item.daily > 0 ? '#212529' : 'transparent'}">${item.daily}</th>
       <th class="text-end" style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};color: ${item.cash > 0 ? '#212529' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th>
       <th class="text-end" style="background-color: ${item.debt > 0 ? '#f1aeb5' : ''};color: ${item.debt > 0 ? '#212529' : 'transparent'}" ${item.debt > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.debt}</th>
     </tr>`;
@@ -324,7 +328,6 @@ function delData(index) {
   toggleModal('myModal', 'hide');
   getList();
 }
-
 </script>
 </body>
 </html>
