@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
   root{
     --bs-primary:#0d6efd;
@@ -88,7 +89,7 @@
       <table></table>
     </div>
     <div class="text-end m-2">
-      <button type="submit" form="add" class="btn btn-sm btn-outline-dark d-print-none shadow" onclick="window.print()"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>  cetak PDF</button>
+      <button type="submit" form="add" class="btn btn-sm btn-outline-dark d-print-none shadow" onclick="printPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>  cetak PDF</button>
     </div>
   </main>
   
@@ -327,6 +328,22 @@ function delData(index) {
   localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
   toggleModal('myModal', 'hide');
   getList();
+}
+
+function printPDF() {
+  var main = document.querySelector('main');
+  html2canvas(main).then(function(canvas) {
+    var imgData = canvas.toDataURL('image/png');
+    var doc = new jsPDF('p', 'mm', 'a4');
+    doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
+    if (confirm('Apakah Anda ingin menyimpan file PDF?')) {
+      var blob = doc.output('blob');
+      var link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'main.pdf';
+      link.click();
+    }
+  });
 }
 </script>
 </body>
