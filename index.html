@@ -4,32 +4,15 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- css andc js bootstrap -->
+  <!-- style css -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/sweetalert.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-  root{
-    --bs-primary:#0d6efd;
-    --bs-secondary:#6c757d;
-    --bs-success:#198754;
-    --bs-info:#0dcaf0;
-    --bs-warning:#ffc107;
-    --bs-danger:#dc3545;
-    --bs-light:#f8f9fa;
-    --bs-dark:#212529;
-  }
   body {
-  	font-weight: 300 !important;
-  	background-imagecolor: rgba(0,0,0,175);
-  	background-size: cover;
-  	background-repeat: no-repeat;
-  	background-attachment: fixed;
-  }
-  @media (min-width: 768px) {
-    .container {	
-    	max-width: 420px;
-    }
+    background-color: #e9ecef;
+    text-transform: capitalize;
+    font-family: 'Ubuntu', sans-serif;
   }
   .container{
     max-width: 41em;
@@ -37,32 +20,22 @@
   .form-control,.fw-bold,.btn{
     text-transform: capitalize;
   }
-  .logo{
-    width: 21px;
-    height: 21px;
-    border-radius: 50px;
-  }
-  .table-responsive {
+  main {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
   table{
-    width: 100%;
+    width: auto;
+    font-size: 0.75rem;
     table-layout: fixed;
     border-collapse: collapse; 
     text-transform: capitalize;
   }
   table th, table td{
-    padding: 0.2rem 0.5rem;
-    word-wrap: break-word;
-  }
-  thead th{
     text-align: center;
+    word-wrap: break-word;
     vertical-align: middle;
-    border: 0.5px solid#ccc;
-  }
-  tbody th,td{
-    vertical-align: middle;
+    padding: 0.15rem 0.25rem;
     border: 0.5px solid#ccc;
   }
   tbody tr:hover{
@@ -70,42 +43,42 @@
     background-color: #ccc;
   }
   tfoot th{
+    border: none;
     padding-top: 1rem;
   }
 </style>
 </head>
-<body class="d-flex h-100 text-center text-bg-light">
-<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="mb-auto">
-    <ol class="list-group list-group-numbered shadow text-start p-2"></ol>
+<body class="text-center">
+<div class="container d-flex flex-column justyfy-content-center w-100 h-100 py-2">
+  <header class="mb-auto px-3">
+    <ol class="list-group list-group-numbered text-start p-2"></ol>
   </header>
-  
-  <main class="text-bg-light px-auto rounded border shadow">
-    <div class="table-responsive p-2">
-      <div class="d-flex justify-content-between align-items-start border-bottom p-2">
-        <h2 class="fw-bold float-md-start mb-0"><img src="img/praba.jpg"  class="logo mb-1"/> job info</h2>
-        <div id="timestamp" class="float-md-end mb-3" style="font-size:0.75rem"></div>
+  <main class="m-auto text-bg-light rounded shadow p-2">
+    <div class="table-responsive py-2">
+      <div class="d-flex justify-content-between align-items-start p-3">
+        <h5 class="fw-bold border-bottom pb-2"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="#fd7e14" class="mb-1" viewBox="0 0 16 16"><path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/></svg>  job info</h5>
+        <div id="timestamp" class="text-end me-2" style="font-size:0.55rem"></div>
       </div>
       <div class="fw-bold person text-start p-2"></div>
-      <table style="font-size:0.5rem"></table>
-    </div>
-    <div class="text-end m-2">
-      <button type="submit" form="add" class="btn btn-sm btn-outline-dark shadow" onclick="printPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M360-460h40v-80h40q17 0 28.5-11.5T480-580v-40q0-17-11.5-28.5T440-660h-80v200Zm40-120v-40h40v40h-40Zm120 120h80q17 0 28.5-11.5T640-500v-120q0-17-11.5-28.5T600-660h-80v200Zm40-40v-120h40v120h-40Zm120 40h40v-80h40v-40h-40v-40h40v-40h-80v200ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>  cetak PDF</button>
+      <table></table>
     </div>
   </main>
   
-  <footer class="mt-auto p-3">
-    <button type="submit" form="add" class="btn btn-sm btn-outline-dark shadow" onclick="toggleModal('myModal','show')"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 -960 960 960" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg>  Tambah Data</button>
+  <footer class="mt-auto">
+    <div class="d-flex justify-content-between align-items-start d-print-none my-2 px-3">
+      <button type="button" class="btn btn-sm btn-outline-dark shadow" onclick="printPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16"><path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/><path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/></svg>  cetak PDF</button>
+      <button type="button" class="btn btn-sm btn-outline-dark shadow" onclick="toggleModal('myModal','show')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg>  Input Data</button>
+    </div>
   </footer>
 </div>
-  <div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <form id="add" onsubmit="addData()" class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title fw-bold">Add Data</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body px-3">
+        <div class="modal-body px-3 text-start">
           <input type="text" id="date" name="date" class="form-control form-control-sm text-center border-0" required>
           <div class="row">
             <div class="col">
@@ -123,30 +96,32 @@
               </div>
             </div>
           </div>
-          <h5 class="fw-bold">Salary</h5>
-          <div class="row">
-            <div class="col-3 offset-1">
-              <label class=" mb-1" for="">Daily</label>
-              <label class=" mb-1" for="">Cash</label>
-              <label class=" mb-1" for="">Debt</label>
-            </div>
-            <div class="col-8">
-              <input type="number" id="daily" name="daily" class="form-control form-control-sm text-center mb-1" onclick="empty('daily')" value="0" list="cashday"/><datalist id="cashday"></datalist>
-              <input type="number" id="cash" name="cash" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('cash')">
-              <input type="number" id="debt" name="debt" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('debt')">
-            </div>
+      <h5 class="fw-bold">Salary</h5>
+      <div class="row text-center">
+        <div class="col">
+          <label for="">Daily</label>
+          <input type="number" id="daily" name="daily" class="form-control form-control-sm text-center mb-1" onclick="empty('daily')" value="0" list="cashday"/><datalist id="cashday"></datalist>
           </div>
-          <label for="">Description</label>
-          <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')" ></textarea>
-        </div>
-        <div class="modal-footer">
-          <button id="del" type="reset" class="btn btn-sm btn-danger">Delete</button>
-          <button type="submit" form="add" class="btn btn-sm btn-dark">Save Changes</button>
-        </div>
-      </form>
-    </div>
+          <div class="col">
+            <label for="">Cash</label>  
+            <input type="number" id="cash" name="cash" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('cash')">
+          </div>
+          <div class="col">
+            <label for="">Debt</label>
+            <input type="number" id="debt" name="debt" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('debt')">
+          </div>
+          </div>
+        <label for="">Description</label>
+        <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')" ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button id="del" type="reset" class="btn btn-sm btn-danger">Delete</button>
+        <button type="submit" form="add" class="btn btn-sm btn-dark">Save Changes</button>
+      </div>
+    </form>
   </div>
-
+</div>
+<!-- javaScript -->
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
 <script src="js/html2canvas.min.js"></script>
@@ -186,7 +161,7 @@ function getList(){
     if (!nameList.includes(item.name)) {
       nameList.push(item.name);
       var listDiv = document.createElement('li');
-      listDiv.className = 'list-group-item text-bg-light';
+      listDiv.className = 'list-group-item';
       listDiv.textContent = item.name;
       listDiv.onclick =()=> getData(item.name);
       listgroup.appendChild(listDiv);
@@ -202,7 +177,7 @@ function getList(){
       cashday.appendChild(two);
     };
   });
-}getList()
+} getList()
 
 function addData(){
   var name = document.getElementById('name').value;
@@ -224,7 +199,6 @@ function addData(){
   localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
   toggleModal('myModal', 'hide');
   getList();
-  getData(name);
 }
 
 function getData(name) {
@@ -250,107 +224,76 @@ function getDay(index, name) {
 
 function getTable(data){
   var table = document.querySelector('table');
-  table.innerHTML = '';
-  
+  table.innerHTML = ''
   var thead = document.createElement('thead');
   thead.innerHTML = `
   <tr>
     <th rowspan="2">No</th>
     <th rowspan="2">tanggal</th>
-    <th colspan="2">status</th>
-    <th colspan="3">upah (gaji)</th>
-  </tr><tr>
-    <th>bekerja</th>
-    <th>lembur</th>
-    <th>perhari</th>
+    <th colspan="2">bekerja</th>
+    <th colspan="3">UPAH (gaji)</th>
+  </tr><tr style="font-size:0.55rem">
+    <th>Bekerja</th>
+    <th>Lembur</th>
+    <th>harian</th>
+    <th>kasbon</th>
     <th>dibayar</th>
-    <th>Kasbon</th>
   </tr>`;
   table.appendChild(thead);
   data.forEach((item, idx) => {
-
     var tbody = document.createElement('tbody');
-    tbody.innerHTML = ` 
-    <tr style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''}">
-      <th class="text-center" onclick="setData(${idx})">${idx + 1}</th>
-      <td class="text-center" onclick="getDay(${idx}, '${item.name}')">${item.date}</td>
-      <td class="text-center"><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''} ></td>
-      <td class="text-center"><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''} ${item.over > 0 ? `onclick="getInfo('${item.desc}')"`: ''}></td>
-      <th class="text-end" style="color: ${item.daily > 0 ? '#212529' : 'transparent'}">${item.daily}</th>
-      <th class="text-end" style="background-color: ${item.cash > 0 ? '#a3cfbb' : ''};color: ${item.cash > 0 ? '#212529' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th>
-      <th class="text-end" style="background-color: ${item.debt > 0 ? '#f1aeb5' : ''};color: ${item.debt > 0 ? '#212529' : 'transparent'}" ${item.debt > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.debt}</th>
+    tbody.innerHTML = `
+    <tr>
+      <th onclick="setData(${item, idx})" style="padding: 0">${item, idx + 1}</th>
+      <td onclick="getDay(${idx}, '${item.name}')">${item.date}</td>
+      <td><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''}></td>
+      <td><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''} ${item.over > 0 ? `onclick="getInfo('${item.desc}')"`: ''}></td>
+      <th style="color: ${item.daily > 0 ? '#212529' : 'transparent'}">${item.daily}</th>
+      <th style="color: ${item.cash > 0 ? '#198754' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th>
+      <th style="color: ${item.debt > 0 ? '#dc3545' : 'transparent'}" ${item.debt > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.debt}</th>
     </tr>`;
     table.appendChild(tbody);
   });
   var tfoot = document.createElement('tfoot');
-  tfoot.innerHTML = `
-    <tr class="text-center">
-      <th colspan="2"></th>
-      <th>${data.filter(item => item.work > 0).length}</th>
-      <th>${data.filter(item => item.over > 0).length}</th>
-      <th class="text-end">${data.reduce((sum, item) => sum + item.daily, 0)}</th>
-      <th class="text-end">${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0)+data.reduce((sum, item) => sum + item.debt, 0))}</th>
-      <th class="text-end">${data.reduce((sum, item) => sum + item.debt, 0)}</th>
-    </tr>`;
+  tfoot.innerHTML =`
+  <tr>
+    <th colspan="2" style="padding: 0"></th>
+    <th>${data.filter(item => item.work > 0).length}</th>
+    <th>${data.filter(item => item.over > 0).length}</th>
+    <th>${data.reduce((sum, item) => sum + item.daily, 0)}</th>
+    <th>${data.reduce((sum, item) => sum + item.cash, 0)}</th>
+    <th>${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0) + data.reduce((sum, item) => sum + item.debt, 0))}</th>
+  </tr>`;
   table.appendChild(tfoot);
 }
 
-function getDay(index, name) {
-  var start = index;
-  var finish = index + 7;
-  var filteredData = dataStorage.filter(item => item.name === name);
-  var data = filteredData.slice(start, finish);
-  return getTable(data);
-}
-
 function getInfo(index){
-  Swal.fire({ text: index, showConfirmButton: true })
-}
-
-function setData(index) {
-  editStorage = index;
-  toggleModal('myModal', 'show');
-  var item = dataStorage[index];
-  document.getElementById('name').value = item.name;
-  document.getElementById('date').value = item.date;
-  document.getElementById('work').checked = item.work;
-  document.getElementById('over').checked = item.over;
-  document.getElementById('daily').value = item.daily;
-  document.getElementById('cash').value = item.cash;
-  document.getElementById('debt').value = item.debt;
-  document.getElementById('desc').value = item.desc;
-  document.querySelector('#del').addEventListener('click', function(){
-    delData(index);
-    getData(item.name);
-  });
-}
-
-function delData(index) {
-  dataStorage.splice(index, 1);
-  localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
-  toggleModal('myModal', 'hide');
-  getList();
+  Swal.fire({
+    text: index,
+    allowOutsideClick: true,
+    showConfirmButton: false
+  })
 }
 
 function printPDF() {
-  var main = document.querySelector('.table-responsive');
+  var main = document.querySelector('main');
   html2canvas(main).then(function(canvas) {
     var imgData = canvas.toDataURL('image/png');
     var doc = new jspdf.jsPDF('p', 'mm', 'a4');
     doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
     Swal.fire({
-      title: 'File PDF',
+      title: 'Simpan PDF',
       text: 'Yakin ingin menyimpan ?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonText: 'Ya, Simpan',
+      confirmButtonText: 'Ya',
       cancelButtonText: 'Tidak'
     }).then((result) => {
       if (result.isConfirmed) {
         var blob = doc.output('blob');
         var link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'Job-Info.pdf';
+        link.download = 'JobInfo.pdf';
         link.click();
       }
     })
@@ -359,3 +302,4 @@ function printPDF() {
 </script>
 </body>
 </html>
+
