@@ -81,13 +81,13 @@
           <input type="text" id="date" name="date" class="form-control form-control-sm text-center border-0" required>
           <div class="row">
             <div class="col">
-              <label for="">Name</label>
+              <label for="">Nama lengkap</label>
               <input type="text" id="name" name="name" class="form-control form-control-sm" onclick="empty('name')" list="listname" required><datalist id="listname" ></datalist>
             </div>
             <div class="col py-2">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="work">
-                <label class="form-check-label" for="">Worked</label>
+                <label class="form-check-label" for="">Bekerja</label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="over">
@@ -95,18 +95,18 @@
               </div>
             </div>
           </div>
-      <h5 class="fw-bold">Salary</h5>
+      <h5 class="fw-bold">Upah ( gaji )</h5>
       <div class="row text-center">
         <div class="col">
-          <label for="">Daily</label>
+          <label for="">Harian</label>
           <input type="number" id="daily" name="daily" class="form-control form-control-sm text-center mb-1" onclick="empty('daily')" value="0" list="cashday"/><datalist id="cashday"></datalist>
           </div>
           <div class="col">
-            <label for="">Cash</label>  
+            <label for="">Dibayar</label>  
             <input type="number" id="cash" name="cash" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('cash')">
           </div>
           <div class="col">
-            <label for="">Debt</label>
+            <label for="">Kasbon</label>
             <input type="number" id="debt" name="debt" class="form-control form-control-sm text-center mb-1" value="0" onclick="empty('debt')">
           </div>
           </div>
@@ -229,11 +229,11 @@ function getTable(data){
   <tr>
     <th rowspan="2">No</th>
     <th rowspan="2">tanggal</th>
-    <th colspan="2">bekerja</th>
+    <th colspan="2">STATUS</th>
     <th colspan="3">UPAH (gaji)</th>
   </tr><tr style="font-size:0.55rem">
-    <th>Bekerja</th>
-    <th>Lembur</th>
+    <th>kerja</th>
+    <th>over<br>time</th>
     <th>harian</th>
     <th>kasbon</th>
     <th>dibayar</th>
@@ -242,8 +242,8 @@ function getTable(data){
   data.forEach((item, idx) => {
     var tbody = document.createElement('tbody');
     tbody.innerHTML = `
-    <tr>
-      <th onclick="setData(${item, idx})" style="padding: 0">${item, idx + 1}</th>
+    <tr style="background: ${item.cash > 0 ? '#d1e7dd' : ''}">
+      <th onclick="setData(${idx})" style="padding: 0">${idx + 1}</th>
       <td onclick="getDay(${idx}, '${item.name}')">${item.date}</td>
       <td><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''}></td>
       <td><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''} ${item.over > 0 ? `onclick="getInfo('${item.desc}')"`: ''}></td>
@@ -264,6 +264,7 @@ function getTable(data){
     <th>${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0) + data.reduce((sum, item) => sum + item.debt, 0))}</th>
   </tr>`;
   table.appendChild(tfoot);
+  Swal.close();
 }
 
 function getInfo(index){
@@ -274,12 +275,39 @@ function getInfo(index){
   })
 }
 
+function setData(index) {
+  editStorage = index;
+  toggleModal('myModal', 'show');
+  var data = dataStorage[index];
+  document.getElementById('name').value = data.name;
+  document.getElementById('date').value = data.date;
+  document.getElementById('work').checked = data.work;
+  document.getElementById('over').checked = data.over;
+  document.getElementById('daily').value = data.daily;
+  document.getElementById('cash').value = data.cash;
+  document.getElementById('debt').value = data.debt;
+  document.getElementById('desc').value = data.desc;
+  document.querySelector('#del').addEventListener('click', function(){
+    delData(index);
+    getData(data.name);
+  });
+}
+
+function delData(index) {
+  dataStorage.splice(index, 1);
+  localStorage.setItem('dataStorage', JSON.stringify(dataStorage));
+  toggleModal('myModal', 'hide');
+  getList();
+}
+
 function printPDF() {
+  loading();
   var main = document.querySelector('main');
   html2canvas(main).then(function(canvas) {
     var imgData = canvas.toDataURL('image/png');
     var doc = new jspdf.jsPDF('p', 'mm', 'a4');
     doc.addImage(imgData, 'PNG', 10, 10, 190, 0);
+    Swal.close();
     Swal.fire({
       title: 'Simpan PDF',
       text: 'Yakin ingin menyimpan ?',
@@ -298,6 +326,18 @@ function printPDF() {
     })
   });
 }
+
+function loading(){
+  Swal.fire({
+    title: 'Loading...',
+    text: 'Please wait',
+    allowOutsideClick: true,
+    showConfirmButton: false,
+    willOpen: () => {
+      Swal.showLoading();
+    }
+  });
+} loading()
 </script>
 </body>
 </html>
