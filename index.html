@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   body {
-    background-color: #e9ecef;
     text-transform: capitalize;
     font-family: 'Ubuntu', sans-serif;
   }
@@ -50,16 +49,16 @@
 </head>
 <body class="text-center">
 <div class="container d-flex flex-column justyfy-content-center w-100 h-100 py-2">
-  <header class="mb-auto px-3">
+  <header class="mb-auto">
     <ol class="list-group list-group-numbered text-start p-2"></ol>
   </header>
-  <main class="m-auto text-bg-light rounded shadow p-2">
+  <main class="m-auto p-2">
     <div class="table-responsive py-2">
-      <div class="d-flex justify-content-between align-items-start p-3">
+      <div class="d-flex justify-content-between align-items-start px-2">
         <h5 class="fw-bold border-bottom pb-2"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="#fd7e14" class="mb-1" viewBox="0 0 16 16"><path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/></svg>  job info</h5>
-        <div id="timestamp" class="text-end me-2" style="font-size:0.55rem"></div>
+        <div id="timestamp" class="text-end mb-2" style="font-size:0.55rem"></div>
       </div>
-      <div class="fw-bold person text-start p-2"></div>
+      <div class="fw-bold person text-start px-2"></div>
       <table></table>
     </div>
   </main>
@@ -249,19 +248,19 @@ function getTable(data){
       <td><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''}></td>
       <td><input class="form-check-input" type="checkbox" ${item.over ? 'checkbox' : 'hidden'}" ${item.over ? 'checked' : ''} ${item.over > 0 ? `onclick="getInfo('${item.desc}')"`: ''}></td>
       <th style="color: ${item.daily > 0 ? '#212529' : 'transparent'}">${item.daily}</th>
-      <th style="color: ${item.cash > 0 ? '#198754' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th>
       <th style="color: ${item.debt > 0 ? '#dc3545' : 'transparent'}" ${item.debt > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.debt}</th>
+      <th style="color: ${item.cash > 0 ? '#198754' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th>
     </tr>`;
     table.appendChild(tbody);
   });
   var tfoot = document.createElement('tfoot');
   tfoot.innerHTML =`
   <tr>
-    <th colspan="2" style="padding: 0"></th>
+    <th colspan="2">TOTAL</th>
     <th>${data.filter(item => item.work > 0).length}</th>
     <th>${data.filter(item => item.over > 0).length}</th>
     <th>${data.reduce((sum, item) => sum + item.daily, 0)}</th>
-    <th>${data.reduce((sum, item) => sum + item.cash, 0)}</th>
+    <th>${data.reduce((sum, item) => sum + item.debt, 0)}</th>
     <th>${data.reduce((sum, item) => sum + item.daily, 0) - (data.reduce((sum, item) => sum + item.cash, 0) + data.reduce((sum, item) => sum + item.debt, 0))}</th>
   </tr>`;
   table.appendChild(tfoot);
