@@ -8,476 +8,458 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/sweetalert.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  body {
-    background-color: #d1e7dd;
-    text-transform: capitalize;
-    font-family: 'Ubuntu', sans-serif;
-  }
-  .container{
-    max-width: 41em;
-  }
-  .form-control,.fw-bold,.btn{
-    text-transform: capitalize;
-  }
-  main {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  @media (min-width: 768px) {
-    .container-xl {	
-    	max-width: 420px;
+  <style>
+    body {
+      background: #ccc;
+      text-transform: capitalize;
+      font-family: 'Ubuntu', sans-serif;
     }
-  }
-  table{
-    width: 100%;
-    font-size: 0.55rem;
-    table-layout: auto;
-    border-collapse: collapse; 
-    text-transform: capitalize;
-  }
-  table th, table td{
-    width: fit-content;
-    text-align: center;
-    white-space: nowrap;
-    word-wrap: break-word;
-    vertical-align: middle;
-    border: 0.25px solid#ccc;
-  }
-  tbody tr:hover{
-    color: #f00;
-    background-color: #ccc;
-  }
-  tfoot th{
-    border: none;
-    padding-top: 1rem;
-  }
-  
-</style>
+    .container{
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .container {	
+      	max-width: 420px;
+      }
+    }
+    .card{
+      width: 100%;
+      height: 100%;
+      display: block;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-body{
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .form-control,
+    .fw-bold,
+    .btn{
+      text-transform: capitalize;
+    }
+    .text-transparent {
+      color: transparent!important;
+    }
+    table{
+      width: 100%;
+      font-size: 0.75rem;
+      table-layout: auto;
+      border-collapse: collapse; 
+      text-transform: capitalize;
+    }
+    table th, 
+    table td{
+      width: fit-content;
+      text-align: center;
+      white-space: nowrap;
+      word-wrap: break-word;
+      vertical-align: middle;
+      border: 0.25px solid#ccc;
+    }
+    tbody tr:hover{
+      color: #f00;
+      background-color: #ccc;
+    }
+    tfoot th,
+    tfoot td{
+      border: none;
+    }
+  </style>
 </head>
 <body class="text-center">
-<div class="container d-flex flex-column justify-content-center w-100 h-100 py-2">
-  <header class="mb-auto px-3">
-    <div class="d-flex justify-content-between align-items-startpx-2 mb-2" style="border-bottom:1px solid#000;">
-      <div class="text-start mb-0">
-        <h2 class="fw-bold text-success mb-0" ><svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="#dc3545" class="bi bi-house-gear mb-2" viewBox="0 0 16 16"><path d="M7.293 1.5a1 1 0 0 1 1.414 0L11 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l2.354 2.353a.5.5 0 0 1-.708.708L8 2.207l-5 5V13.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 2 13.5V8.207l-.646.647a.5.5 0 1 1-.708-.708z"/><path d="M11.886 9.46c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.044c-.613-.181-.613-1.049 0-1.23l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"/></svg>Pr@ba</h2><small style="font-weight:bold;font-size:0.75rem;">Welding & Productions</small>
+  
+  <div class="container">
+    <div class="card">
+      <!--header-->
+      <div class="card-header">
+        <div class="d-flex justify-content-between">
+          <div class="fs-1 fw-bold">job activity</div>
+          <div id="timestamp" style="font-size: 0.75rem"></div>
+        </div>
       </div>
-      <div id="timestamp" class="text-end mb-2" style="font-size:0.75rem;font-weight:bold;"></div>
+      <!--body-->
+      <div class="card-body">
+        <div class="table-responsive"></div>
+      </div>
+      <!--footer-->
+      <div class="card-footer">
+        <div class="d-flex justify-content-between">
+          <button type="button" class="btn btn-sm btn-outline-dark" onclick="loadForm('new')">NEW</button>
+          <select id="select" class="form-select form-select-sm w-50 mx-2"></select>
+          <button id="add" type="button" class="btn btn-sm btn-outline-dark d-none" >ADD</button>
+        </div>
+        <div class="my-2">
+          <button id="pdf" type="button" class="btn btn-sm btn-outline-dark d-none" onclick="printPDF()">PDF</button>
+        </div>
+      </div>
     </div>
-  </header>
-  <main class="text-bg-light rounded p-2">
-    <div class="table-responsive align-itema-center">
-      <div id="person" class="d-flex justify-content-between align-items-start px-2 mb-0"></div>
-      <table id="listData" class="text-bg-light"></table>
-    </div>
-  </main>
-  <footer class="mt-auto">
-    <div class="d-flex justify-content-between align-items-start my-2 px-3">
-      <button type="button" class="btn btn-sm btn-outline-dark shadow" onclick="printPDF()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.6 11.85H0v3.999h.791v-1.342h.803q.43 0 .732-.173.305-.175.463-.474a1.4 1.4 0 0 0 .161-.677q0-.375-.158-.677a1.2 1.2 0 0 0-.46-.477q-.3-.18-.732-.179m.545 1.333a.8.8 0 0 1-.085.38.57.57 0 0 1-.238.241.8.8 0 0 1-.375.082H.788V12.48h.66q.327 0 .512.181.185.183.185.522m1.217-1.333v3.999h1.46q.602 0 .998-.237a1.45 1.45 0 0 0 .595-.689q.196-.45.196-1.084 0-.63-.196-1.075a1.43 1.43 0 0 0-.589-.68q-.396-.234-1.005-.234zm.791.645h.563q.371 0 .609.152a.9.9 0 0 1 .354.454q.118.302.118.753a2.3 2.3 0 0 1-.068.592 1.1 1.1 0 0 1-.196.422.8.8 0 0 1-.334.252 1.3 1.3 0 0 1-.483.082h-.563zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638z"/></svg></button>
-      <input type="text" name="user" id="user" class="form-control text-center shadow mx-2" list="listUser" placeholder="Cari"/><datalist id="listUser"></datalist>
-      <button type="button" class="btn btn-sm btn-outline-dark shadow" onclick="addSheet()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/></svg></button>
-    </div>
-  </footer>
-</div>
-<!-- javaScript -->
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/sweetalert.min.js"></script>
-<script src="js/html2canvas.min.js"></script>
-<script src="js/jspdf.umd.min.js"></script>
-<script>
-var scriptUrl = 'https://script.google.com/macros/s/AKfycbxRi__4Al8In_swLVt09MYo54EZsuuxIsyuMLPsZVw8_fDH2mQOHzjlhpydOlo3Xn61/exec';
-
-document.querySelector('#timestamp').textContent = new Date().toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-
-function empty(id){
-  document.getElementById(id).value = null;
-}
-
-function loading(){
-  Swal.fire({
-    title: 'Loading...',
-    text: 'Please wait',
-    allowOutsideClick: true,
-    showConfirmButton: false,
-    willOpen: () => {
-      Swal.showLoading();
-    }
-  });
-} 
-
-function getSheet(){
-  loading();
-  fetch(scriptUrl)
-  .then(response => response.json())
-  .then(data => {
-    var list = document.getElementById('listUser');
-    list.innerHTML ='';
-    data.forEach((sheet)=> {
-      var opt = document.createElement('option');
-      opt.value = sheet;
-      opt.textContent = sheet;
-      list.appendChild(opt);
-    });
-    var searchSheet = document.getElementById('user');
-    searchSheet.addEventListener('change', function(){
-      getData(this.value);
-      searchSheet.value = null;
-    });
-    Swal.close();
-  })
-  .catch(error => console.error(error));
-}
-getSheet()
-
-function addSheet(){
-  Swal.fire({
-    title: 'Add Data',
-    html: `
-    <input type="text" id="name" name="name" class="form-control form-control-sm" required>`,
-    focusConfirm: false,
-    showCancelButton: true,
-    confirmButtonText: 'Simpan',
-    confirmButtonColor: '#198754',
-    cancelButtonText: 'Batal',
-    preConfirm: () => {
-      return { name: document.getElementById('name').value
-      }
-    }
-    }).then((result) => {
-    if (result.value) {
-      loading();
-      fetch(scriptUrl, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `action=sheet&name=${result.value.name}`
-      })
-      .then(response => response.text())
-      .then(data => {
-        console.log(data);
-        getSheet();
-      })
-      .catch(error => {
-        console.error(error);
-        Swal.close();
-      });
-    }
-  });
-}
-
-function getData(key){
-  loading();
-  var table = document.getElementById('listData');
-  var person = document.getElementById('person');
-  [table, person].forEach(element=> { element.innerHTML = '' });
-  person.innerHTML = `<p>${key}</p><svg onclick="addData('${key}')" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-240Zm-320 80v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q37 0 73 4.5t72 14.5l-67 68q-20-3-39-5t-39-2q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32h240v80H160Zm400 40v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q8 9 12.5 20t4.5 22q0 11-4 22.5T903-340L683-120H560Zm300-263-37-37 37 37ZM620-180h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19ZM480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47Zm0-80q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Z"/></svg>`;
-  var thead = document.createElement('thead');
-  thead.innerHTML = ` <tr> <th rowspan="2">No</th> <th rowspan="2">TANGGAL</th> <th colspan="2">STATUS</th> <th colspan="3">UPAH / GAJI</th> </tr><tr style="font-size:0.35rem"> <th>kerja</th> <th>over<br>time</th> <th>harian</th> <th>kasbon</th> <th>dibayar</th> </tr>`;
-  table.appendChild(thead);
-  fetch(`${scriptUrl}?keyword=${encodeURIComponent(key)}`)
-  .then(response => response.json())
-  .then(data => {
-    var tbody = document.createElement('tbody');
-    data.forEach((item, index) => {
-      var row = document.createElement('tr');
-      row.innerHTML = `<th>${index + 1}</th><td onclick="showOptions(['${item.date}','${item.work}','${item.over}','${item.daily}','${item.debt}','${item.cash}','${item.desc}'],'${key}')">${item.date}</td><td><input class="form-check-input" type="checkbox" ${item.work ? 'checked' : ''}></td><td><input class="form-check-input" type="checkbox" ${item.over ? 'checked' : ''}></td><th style="color: ${item.daily > 0 ? '#212529' : 'transparent'}" ${item.over > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.daily}</th><th style="color: ${item.cash > 0 ? '#dc3545' : 'transparent'}" ${item.cash > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.cash}</th><th style="color: ${item.debt > 0 ? '#198754' : 'transparent'}" ${item.debt > 0 ? `onclick="getInfo('${item.desc}')"`: ''}>${item.debt}</th>`;
-      tbody.appendChild(row);
-    });
-    table.appendChild(tbody);
-    var tfoot = document.createElement('tfoot');
-    tfoot.innerHTML = `
-    <tr><th colspan="2" class="text-end">T O T A L</th><th>${data.filter(item => item.work).length}</th><th>${data.filter(item => item.over).length}</th><th>${data.reduce((sum, item) => sum + parseInt(item.daily)||0, 0)}</th><th>${data.reduce((sum, item) => sum + parseInt(item.cash)||0, 0)}</th><th>${data.reduce((sum, item) => sum + parseInt(item.debt)||0, 0)}</th></tr>
+  </div>
+  <!-- javaScript -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/sweetalert.min.js"></script>
+  <script src="js/html2canvas.min.js"></script>
+  <script src="js/jspdf.umd.min.js"></script>
+  <script>
+    var scriptUrl = 'https://script.google.com/macros/s/AKfycbyBd7Ix3evs_u9oVE9_2DuVpSPSN2315vZLxmBA2SP-3vE5UQEkd9eAaCcw39dwwjwhuA/exec';
     
-    <tr style="font-size: 1.5rem"><th colspan="7" class="text-end text-danger">Rp : ${data.reduce((sum, item) => sum + parseInt(item.daily)||0, 0) - (data.reduce((sum, item) => sum + parseInt(item.debt)||0, 0) + data.reduce((sum, item) => sum + parseInt(item.cash)||0, 0))}</th></tr>`;
-    table.appendChild(tfoot);
-    Swal.close();
-  })
-  .catch(error => console.error(error));
-}
-
-function getInfo(index){
-  Swal.fire({
-    text: index,
-    allowOutsideClick: true,
-    showConfirmButton: false
-  })
-}
-
-function addData(name){
-  Swal.fire({
-    title: 'Add Data',
-    html: ` 
-        <div class="text-start">
-          <input type="text" id="date" name="date" class="form-control form-control-sm text-center mb-2 border-0" value="${new Date().toLocaleString('id-ID')}" required>
-          <div class="row">
-            <div class="col">
-              <label for="">Name</label>
-              <input type="text" id="name" name="name" class="form-control form-control-sm" onclick="empty('name')" value="${name ? name : ''}" required>
-            </div>
-            <div class="col py-2">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="work">
-                <label class="form-check-label" for="">Bekerja</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="over">
-                <label class="form-check-label" for="">Overtime</label>
-              </div>
-            </div>
-          </div>
-          <h5 class="fw-bold">Salary</h5>
-          <div class="row text-center">
-            <div class="col">
-              <label for="">Harian</label>
-              <input type="number" id="daily" name="daily" class="form-control form-control-sm text-center mb-1" onclick="empty('daily')" list="salary"/><datalist id="salary"></datalist>
-            </div>
-            <div class="col">
-              <label for="">Dibayar</label>
-              <input type="number" id="cash" name="cash" class="form-control form-control-sm text-center mb-1" onclick="empty('cash')">
-            </div>
-            <div class="col">
-              <label for="">Kasbon</label>
-              <input type="number" id="debt" name="debt" class="form-control form-control-sm text-center mb-1" onclick="empty('debt')">
-            </div>
-          </div>
-          <label for="">Description</label>
-          <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')"></textarea>
-        </div>`,
-    focusConfirm: false,
-    showCancelButton: true,
-    confirmButtonText: 'Simpan',
-    confirmButtonColor: '#198754',
-    cancelButtonText: 'Batal',
-    didOpen: () => {
-      var salary = document.getElementById('salary');
-      salary.innerHTML ='';
-      fetch(`${scriptUrl}?keyword=${encodeURIComponent(name)}`)
-        .then(response => response.json())
-        .then(data => {
-          var listDaily = [];
-          data.forEach((item)=>{
-            if (item.daily !== 0 && !listDaily.includes(item.daily)) {
-              listDaily.push(item.daily);
-              var opt = document.createElement('option');
-              opt.textContent = item.daily;
-              salary.appendChild(opt);
-            }
-          })
-        })
-        .catch(error => console.error(error));
-    },
-    preConfirm: () => {
-      return {
-        name: document.getElementById('name').value,
-        date: document.getElementById('date').value,
-        work: document.getElementById('work').checked,
-        over: document.getElementById('over').checked,
-        daily: document.getElementById('daily').value,
-        cash: document.getElementById('cash').value,
-        debt: document.getElementById('debt').value,
-        desc: document.getElementById('desc').value
-      }
+    window.addEventListener('load',loadSheet,true)
+    
+    function loading(){
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        }
+      });
+    } 
+    
+    function message(data){
+      Swal.close();
+      Swal.fire({ text: data, allowOutsideClick: true, showConfirmButton: false })
     }
-  }).then((result) => {
-    if (result.value) {
+    
+    function loadSheet(){
       loading();
-      fetch(scriptUrl, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: `action=add&name=${result.value.name}&date=${result.value.date}&work=${result.value.work}&over=${result.value.over}&daily=${result.value.daily}&cash=${result.value.cash}&debt=${result.value.debt}&desc=${result.value.desc}`
-      })
-      .then(response => response.text())
+      document.getElementById('timestamp').textContent = new Date().toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      var select = document.getElementById('select');
+      fetch(scriptUrl)
+      .then(response => response.json())
       .then(data => {
-        console.log(data);
+        select.innerHTML='<option>Buka data</option>';
+        data.splice(1).forEach(sh=> {
+          var option = document.createElement('option');
+          option.textContent = sh;
+          select.appendChild(option);
+        });
+        select.addEventListener('change',function(){optiSheet(this.value);});
         Swal.close();
-        getData(result.value.name);
       })
-      .catch(error => {
-        console.error(error);
-        Swal.close();
-      });
+      .catch(error => message(error));  
     }
-  });
-}
-
-function showOptions(index, name){
-  Swal.fire({
-    icon: 'question',
-    title: 'Pilih Aksi',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Edit',
-    denyButtonText: 'Hapus',
-    cancelButtonText: 'Batal'
-  }).then((result) => {
-    if (result.isConfirmed) {
+    
+    function optiSheet(name){
       Swal.fire({
-        title: 'Set Data',
-        html: ` 
-        <div class="text-start">
-          <input type="text" id="date" name="date" class="form-control form-control-sm text-center mb-2 border-0" value="${index ? index[0] : new Date().toLocaleString('id-ID')}" required>
-          <div class="row">
-            <div class="col">
-              <label for="">Name</label>
-              <input type="text" id="name" name="name" class="form-control form-control-sm" onclick="empty('name')" value="${name ? name : ''}" required>
-            </div>
-            <div class="col py-2">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="work" checked="${index ? index[1] : ''}">
-                <label class="form-check-label" for="">Bekerja</label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="over" checked="${index ? index[2] : ''}">
-                <label class="form-check-label" for="">Overtime</label>
-              </div>
-            </div>
-          </div>
-          <h5 class="fw-bold">Salary</h5>
-          <div class="row text-center">
-            <div class="col">
-              <label for="">Harian</label>
-              <input type="number" id="daily" name="daily" class="form-control form-control-sm text-center mb-1" onclick="empty('daily')" value="${index ? index[3] : '0'}" list="salary"/><datalist id="salary"></datalist>
-            </div>
-            <div class="col">
-              <label for="">Dibayar</label>
-              <input type="number" id="cash" name="cash" class="form-control form-control-sm text-center mb-1" value="${index ? index[4] : '0'}" onclick="empty('cash')">
-            </div>
-            <div class="col">
-              <label for="">Kasbon</label>
-              <input type="number" id="debt" name="debt" class="form-control form-control-sm text-center mb-1" value="${index ? index[5] : '0'}" onclick="empty('debt')">
-            </div>
-          </div>
-          <label for="">Description</label>
-          <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')" >${index ? index[6] : ''}</textarea>
-        </div>`,
-        focusConfirm: false,
+        icon: 'question',
+        title: 'Pilih Aksi',
+        showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Simpan',
-        confirmButtonColor: '#198754',
-        cancelButtonText: 'Batal',
-        didOpen: () => {
-          var salary = document.getElementById('salary');
-          salary.innerHTML ='';
-          fetch(`${scriptUrl}?keyword=${encodeURIComponent(name)}`)
-            .then(response => response.json())
-            .then(data => {
-              var listDaily = [];
-              data.forEach((item)=>{
-                if (item.daily !== 0 && !listDaily.includes(item.daily)) {
-                  listDaily.push(item.daily);
-                  var opt = document.createElement('option');
-                  opt.textContent = item.daily;
-                  salary.appendChild(opt);
-                }
-              })
-            })
-            .catch(error => console.error(error));
-        },
-        preConfirm: () => {
-          return {
-            name: document.getElementById('name').value,
-            date: document.getElementById('date').value,
-            work: document.getElementById('work').checked,
-            over: document.getElementById('over').checked,
-            daily: document.getElementById('daily').value,
-            cash: document.getElementById('cash').value,
-            debt: document.getElementById('debt').value,
-            desc: document.getElementById('desc').value
-          }
-        }
-      }).then((result) => {
-        if (result.value) {
-          loading();
-          fetch(scriptUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: `action=set&name=${result.value.name}&date=${result.value.date}&work=${result.value.work}&over=${result.value.over}&daily=${result.value.daily}&cash=${result.value.cash}&debt=${result.value.debt}&desc=${result.value.desc}`
-          })
-          .then(response => response.text())
-          .then(data => {
-            console.log(data);
-            Swal.close();
-            getData(result.value.name);
-          })
-          .catch(error => {
-            console.error(error);
-            Swal.close();
-          });
-        }
-      });
-    } else if (result.isDenied) {
-      Swal.fire({
-        title: 'Hapus Data',
-        text: 'Apakah Anda yakin ingin menghapus data ini?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Hapus',
-        confirmButtonColor: '#dc3545',
+        confirmButtonText: 'Buka',
+        denyButtonText: 'Hapus',
         cancelButtonText: 'Batal'
       }).then((result) => {
-        if (result.value) {
+        if (result.isConfirmed) {
           loading();
-          fetch(scriptUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            body: `action=del&name=${name}&date=${index[0]}`
-          })
-          .then(response => response.text())
-          .then(data => {
-            console.log(data);
-            Swal.close();
-            getData(name);
-          })
-          .catch(error => {
-            console.error(error);
-            Swal.close();
+          loadData(name);
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: 'Hapus Data',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            confirmButtonColor: '#dc3545',
+            cancelButtonText: 'Batal'
+          }).then((result) => {
+            if (result.value) {
+              loading();
+              fetch(scriptUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: `action=del_sheet&name=${name}`
+              })
+              .then(response => response.text())
+              .then(data => {
+                message(data);
+                loadData(name);
+              })
+              .catch(error => {
+                message(error);
+                Swal.close();
+              });
+            }
           });
         }
       });
     }
-  });
-}
-
-function printPDF() {
-  loading();
-  var main = document.querySelector('main');
-  html2canvas(main).then(function(canvas) {
-    var imgData = canvas.toDataURL('image/png');
-    var doc = new jspdf.jsPDF('p', 'mm', 'a4');
-    var imgWidth = 190;
-    var imgHeight = canvas.height * imgWidth / canvas.width;
-    var heightLeft = imgHeight;
-    var pageHeight = doc.internal.pageSize.height;
-    var position = 10;
-
-    doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft >= 0) {
-      position = heightLeft - pageHeight + 10;
-      doc.addPage();
-      doc.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
+    
+    
+    function loadData(key) {
+      let html = '';
+      fetch(`${scriptUrl}?keyword=${encodeURIComponent(key)}`).then(res => res.json()).then(data => {
+    
+        let works  = data.filter(a => a.work).length;
+        let overs  = data.filter(a => a.over).length;
+        let wages  = data.reduce((sum, a) => sum + (parseInt(a.wages) || 0), 0);
+        let debet  = data.reduce((sum, a) => sum + (parseInt(a.debt)  || 0), 0);
+        let credit = data.reduce((sum, a) => sum + (parseInt(a.pays)  || 0), 0);
+        let saldo = wages - (debet + credit);
+        
+        html += `<div id="title" class="fs-2 fw-bold text-primary">${key}</div><div class="fw-bold text-start">absensi kerja</div><table class="my-2"><thead><tr> <th rowspan="2">No</th><th rowspan="2">Tanggal</th><th colspan="2">Status</th> <th rowspan="2">Upah</th></tr><tr style="font-size:0.35rem"><th>kerja</th><th>over<br>time</th></tr></thead>`;
+        
+        data.filter(a => a.work >0 || a.over >0).forEach((a, i) => {
+          html += `<tbody><tr><td>${i + 1}</td><td onclick="actions('add','${key}',['${a.date}','${a.work}','${a.over}','${a.wages}','${a.debt}','${a.pays}','${a.desc}'])">${a.date}</td><td><input type="checkbox" ${a.work ? 'checked' : ''}  disabled/></td><td><input type="checkbox" ${a.over ? 'checked' : ''} ${a.over >0 ? `onclick="message('${a.desc}')"` : ''} disabled/></td><td class="${a.wages > 0 ? 'text-end pe-1' : 'text-transparent'}" ${a.over >0 ? `onclick="message('${a.desc}')"` : ''}>${a.wages}</td></tr></tbody>`;
+        });
+        html += `<tfoot><tr class="text-danger"><th colspan="2" class="text-end pe-1">=></th><th>${works}</th><th>${overs}</th><th class="text-end pe-1">${wages}</th></tr></tfoot></table>`;
+        
+        html += `<div class="fw-bold text-start">transaksi upah</div><table class="my-2"><thead><tr><th>No</th><th>Tanggal</th><th>Kasbon</th><th>Dibayar</th></tr></thead>`;
+        
+        data.filter(a => a.debt > 0 || a.pays > 0).forEach((a, i) => {
+          html += `<tbody><tr ${a.debt > 0 || a.pays >0 ? `onclick="message('${a.desc}')"` : ''}><td>${i + 1}</td><td>${a.date}</td><td class="${a.debt > 0 ? 'text-end pe-1' : 'text-transparent'}">${a.debt}</td><td class="${a.pays > 0 ? 'text-end pe-1' : 'text-transparent'}">${a.pays}</td></tr></tbody>`;
+        });
+        html += `
+        <tfoot><tr class="text-danger"><th colspan="2" class="text-end pe-1">=></th><th class="text-end pe-1">${debet}</th><th class="text-end pe-1">${credit}</th></tr>
+        <tr><th colspan="2" class="text-start ps-2 pt-3">bekerja</th><td class="text-end pe-2 pt-3">${works} hari</td></tr>
+        <tr><th colspan="2" class="text-start ps-2">overtime</th><td class="text-end pe-2">${overs} kali</td></tr>
+        <tr><th colspan="2" class="text-start ps-2">Total Upah</th><td class="text-end pe-2">${wages}</td></tr>
+        <tr><th colspan="2" class="text-start ps-2">Total kasbon</th><td class="text-end pe-2">${debet}</td></tr>
+        <tr><th colspan="2" class="text-start ps-2">Total dibayar</th><td class="text-end pe-2">${credit}</td></tr>
+        <tr style="font-size: 1rem;"><th colspan="3" class="${saldo !== 0 ? 'text-danger' : 'text-center font-monospace text-info py-2'}">${saldo > 0 ? `Upah Sisa : ${saldo}` : saldo < 0 ? `Upah Minus : ${Math.abs(saldo)}`: 'Lunas !.'}</th></tr>
+        </tfoot></table>`;
+        
+        const table = document.querySelector('.table-responsive');
+        table.innerHTML = html;
+        const add = document.querySelector('#add');
+        const pdf = document.querySelector('#pdf');
+        [add,pdf].forEach(el=>{el.classList.remove('d-none')});
+        add.onclick=()=> loadForm('add',key);
+        Swal.close();
+      }).catch(err => loadInfo(err));
     }
-
-    Swal.fire({
-      title: 'Simpan PDF',
-      text: 'Yakin ingin menyimpan ?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Ya',
-      cancelButtonText: 'Tidak'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        var blob = doc.output('blob');
-        var link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = 'Pr@Ba.pdf';
-        link.click();
+    
+    function loadForm(type, name, index=''){
+      let action = index ? 'set' : 'add';
+      if(type === 'new'){
+        Swal.fire({
+          title: 'New Data',
+          html: `
+          <input type="text" id="name" name="name" class="form-control text-center" required>`,
+          focusConfirm: false,
+          showCancelButton: true,
+          confirmButtonText: 'Simpan',
+          confirmButtonColor: '#198754',
+          cancelButtonText: 'Batal',
+          preConfirm: () => {
+            return { name: document.getElementById('name').value
+            }
+          }
+          }).then((result) => {
+          if (result.value) {
+            loading();
+            fetch(scriptUrl, {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              body: `action=sheet&name=${result.value.name}`
+            })
+            .then(response => response.text())
+            .then(data => {
+              message(data);
+              loadSheet();
+            })
+            .catch(error => message(error));
+          }
+        });
+      }else if(type === 'add'){
+        Swal.fire({
+          title: name,
+          html: ` 
+          <div class="text-start">
+          <div class="d-flex justify-content-between align-items-start my-1">
+            <label class="fw-bold">Tanggal</label>
+            <input type="text" id="date" class="form-control form-control-sm text-center w-50" value="${index ? index[0] : new Date().toLocaleString('id-ID')}" required>
+          </div>
+          <label class="fw-bold">Status Kerja</label>
+          <div class="d-flex justify-content-between align-items-start my-1">
+            <label class="ps-2">Bekerja</label>
+            <input type="text" id="work" class="form-control form-control-sm text-center w-50" list="true/false" value="${index ? index[1] : 'false'}" onclick="document.getElementById('work').value=null">
+          </div>
+          <div class="d-flex justify-content-between align-items-start my-1">
+            <label class="ps-2">Overtime</label>
+            <input type="text" id="over" class="form-control form-control-sm text-center w-50" list="true/false" value="${index ? index[2] : 'false'}" onclick="document.getElementById('over').value=null">
+          </div>
+          <div class="d-flex justify-content-between align-items-start my-1">
+            <label class="fw-bold">Upah Harian</label>
+            <input type="number" id="wages" class="form-control form-control-sm text-center w-50" list="listwages" value="${index ? index[3] : ''}">
+          </div>
+          <label class="fw-bold">Transaksi Upah</label>
+          <div class="d-flex justify-content-between align-items-start my-1">
+            <label class="ps-2">Kasbon</label>
+            <input type="number" id="debt" class="form-control form-control-sm text-center w-50" value="${index ? index[4] : ''}">
+          </div>
+          <div class="d-flex justify-content-between align-items-start my-1">
+            <label class="ps-2">Dibayar</label>
+            <input type="number" id="pays" class="form-control form-control-sm text-center w-50" value="${index ? index[5] : ''}">
+          </div>
+          <label class="fw-bold">Deskripsi</label>
+          <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')">${index ? index[6] : ''}</textarea>
+          <datalist id="true/false">
+            <option>true</option>
+            <option>false</option>
+          </datalist>
+          <datalist id="listwages"></datalist></div>`,
+          focusConfirm: false,
+          showCancelButton: true,
+          confirmButtonText: 'Simpan',
+          confirmButtonColor: '#198754',
+          cancelButtonText: 'Batal',
+          didOpen: () => {
+            var list = document.getElementById('listwages');
+            fetch(`${scriptUrl}?keyword=${encodeURIComponent(name)}`)
+              .then(response => response.json())
+              .then(data => {
+                var listwages = [];
+                data.forEach((a)=>{
+                  if (a.wages !== 0 && !listwages.includes(a.wages)) {
+                    listwages.push(a.wages);
+                    var opt = document.createElement('option');
+                    opt.textContent = a.wages;
+                    list.appendChild(opt);
+                  }
+                })
+              }).catch(error => console.error(error));
+          },
+          preConfirm: () => {
+            return {
+              name: name,
+              date: document.getElementById('date').value,
+              work: document.getElementById('work').value,
+              over: document.getElementById('over').value,
+              wages: document.getElementById('wages').value || 0,
+              debt: document.getElementById('debt').value || 0,
+              pays: document.getElementById('pays').value || 0,
+              desc: document.getElementById('desc').value
+            }
+          }
+        }).then((result) => {
+          if (result.value) {
+            loading();
+            fetch(scriptUrl, {
+              method: 'POST',
+              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+              body: `action=${action}&name=${result.value.name}&date=${result.value.date}&work=${result.value.work}&over=${result.value.over}&wages=${result.value.wages}&debt=${result.value.debt}&pays=${result.value.pays}&desc=${result.value.desc}`
+            })
+            .then(response => response.text())
+            .then(data => {
+              message(data);
+              Swal.close();
+              loadData(name);
+            })
+            .catch(error => {
+              message(error);
+              Swal.close();
+            });
+          }
+        });
       }
-    });
-  });
-}
-</script>
+    }
+    
+    function actions(type, name, index){
+      Swal.fire({
+        icon: 'question',
+        title: 'Pilih Aksi',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Edit',
+        denyButtonText: 'Hapus',
+        cancelButtonText: 'Batal'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          loadForm(type, name, index)
+        } else if (result.isDenied) {
+          Swal.fire({
+            title: 'Hapus Data',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            confirmButtonColor: '#dc3545',
+            cancelButtonText: 'Batal'
+          }).then((result) => {
+            if (result.value) {
+              loading();
+              fetch(scriptUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: `action=del&name=${name}&date=${index[0]}`
+              })
+              .then(response => response.text())
+              .then(data => {
+                message(data);
+                loadData(name);
+              })
+              .catch(error => {
+                message(error);
+                Swal.close();
+              });
+            }
+          });
+        }
+      });
+    }
+    
+    function printPDF() {
+      const title = document.getElementById('select').value;
+      const target = document.querySelector('.card-body'); // FIX selector
+    
+      if (!target || !target.innerHTML.trim()) {
+        Swal.fire({
+          icon: 'warning',
+          text: 'Data belum ditampilkan'
+        });
+        return;
+      }
+    
+      Swal.fire({
+        title: 'Membuat PDF...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => Swal.showLoading()
+      });
+    
+      html2canvas(target, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff'
+      }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+    
+        const pageWidth  = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+    
+        const imgWidth = pageWidth - 20;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+    
+        let y = 10;
+        let heightLeft = imgHeight;
+    
+        pdf.addImage(imgData, 'PNG', 10, y, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+    
+        while (heightLeft > 0) {
+          y = heightLeft - imgHeight + 10;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 10, y, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+    
+        Swal.close();
+        pdf.save(`${title}.pdf`);
+      }).catch(err => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: err.message || err
+        });
+      });
+    }
+  </script>
 </body>
 </html>
-
