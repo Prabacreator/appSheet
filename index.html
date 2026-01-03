@@ -1,465 +1,588 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- style css -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/sweetalert.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: #ccc;
-      text-transform: capitalize;
-      font-family: 'Ubuntu', sans-serif;
-    }
-    .container{
-      display: flex;
-      width: 100%;
-      min-height: 100vh;
-      justify-content: center;
-      align-items: center;
-    }
-    @media (min-width: 768px) {
-      .container {	
-      	max-width: 420px;
-      }
-    }
-    .card{
-      width: 100%;
-      height: 100%;
-      display: block;
-      align-items: center;
-      justify-content: center;
-    }
-    .card-body{
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .form-control,
-    .fw-bold,
-    .btn{
-      text-transform: capitalize;
-    }
-    .text-transparent {
-      color: transparent!important;
-    }
-    table{
-      width: 100%;
-      font-size: 0.75rem;
-      table-layout: auto;
-      border-collapse: collapse; 
-      text-transform: capitalize;
-    }
-    table th, 
-    table td{
-      width: fit-content;
-      text-align: center;
-      white-space: nowrap;
-      word-wrap: break-word;
-      vertical-align: middle;
-      border: 0.25px solid#ccc;
-    }
-    tbody tr:hover{
-      color: #f00;
-      background-color: #ccc;
-    }
-    tfoot th,
-    tfoot td{
-      border: none;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>greens4pk</title>
+  <!-- STYLE CSD -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/sweetalert.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<style>
+:root {
+  --bs-primary:#0d6efd;
+  --bs-secondary:#6c757d;
+  --bs-success:#198754;
+  --bs-info:#0dcaf0;
+  --bs-warning:#ffc107;
+  --bs-danger:#dc3545;
+  --bs-light:#f8f9fa;
+  --bs-dark:#212529;-
+}
+body{ font-family: system-ui, -apple-system, "Segoe UI", sans-serif;background:#f8f9fa;}
+.container{max-width: 41em; overflow-x: auto;-webkit-overflow-scrolling: touch;}
+@media(min-width:768px){.container{max-width:420px}}
+.Offcanvas{background-color: transparent!important;}
+.small{font-size: 0.75rem!important;}
+.tiny{font-size: 0.35rem!important;}
+a{text-decoration: none!important}
+
+
+.btn{border-radius: 17px!important;}
+.border{border: 0.3px solid#000!important;border-radius: 25px!important;}
+.border-bottom{border-bottom:0.3px solid#ccc!important;}
+.transparent{color: transparent!important;}
+
+/* input css */
+label,.btn,.fw-bold,.form-control{text-transform: capitalize!important;}
+.form-select,.form-select:focus{box-shadow: none;border: none!important;--bs-border-color: transparent;--bs-focus-ring-color: transparent;background-color: transparent!important;}
+.form-control{border:.3px solid#000!important;background-color: transparent!important;font-size:1.2rem!important;color:var(--bs-primary)!important;text-shadow: 1px 1px#212529;}
+input[type=text],input[type=number]{border-radius: 50px!important;}
+input[type=number]{font-weight: bold;text-align: center;}
+
+/* table css */
+.table-responsive{justify-content: center!important;text-align: center!important;align-items: center!important;}
+table{width:100%;table-layout: auto; text-transform: capitalize;border-collapse: collapse;}
+table th,table td{font-size;0.75rem;width: fit-content;white-space: nowrap;word-wrap: break-word;vertical-align: middle;font-family: var(--bs-font-monospace)!important;border:.2px solid#ccc;}
+tfoot th, tfoot td{border:none!important;}
+
+/* sweetalert2 css */
+.swal2-popup{padding: 1.5rem border-radius: 1rem; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;}
+.swal2-title{font-size: 1.25rem; font-weight: 700;}
+.swal2-html-container{ font-size: .95rem; color: #555;}
+.swal2-confirm{ color: var(--bs-dark); background: var(--bs-info); border-radius: 25px;  padding: .5rem 1.25rem;  font-weight: 600;}
+.swal2-cancel{ color: var(--bs-dark); background: var(--bs-info-bg-subtle); border-radius: 25px; padding: .5rem 1.25rem; font-weight: 600;}
+.swal2-icon{margin-top: .5rem;}
+</style>
 </head>
-<body class="text-center">
-  
-  <div class="container">
-    <div class="card">
-      <!--header-->
-      <div class="card-header">
-        <div class="d-flex justify-content-between">
-          <div class="fs-1 fw-bold">job activity</div>
-          <div id="timestamp" style="font-size: 0.75rem"></div>
+<body class="bg-light-subtle">
+  <!-- FLOATBTN -->
+  <div id="floatBtn" class="bg-info"></div>
+  <div class="container py-2">
+    <!-- TABLE -->
+    <div class="d-flex justify-content-between px-2 text-shadow border-bottom">
+      <div class="fs-1 mt-3 fw-bold text-info" style="text-shadow: 1px 4px 4px #000">Job Actifity</div>
+      <div class="mb-3">
+        <div id="datestamp" class="mb-3"></div>
+      </div>
+    </div>
+    <div class="my-1">
+      <!-- SELECT SHEET -->
+      <select id="sheetSelect" class="form-select form-select-sm fs-5 fw-bold w-auto"></select>
+      <!-- FILTER WEEK -->
+      <select id="selectWeek" class="form-select form-select-sm w-auto"></select>
+    </div>
+    <a href="#">
+    <div class="table-responsive">
+      <table id="table" ></table>
+    </div>
+    </a>
+  </div>
+
+<!-- OFFCANVAS INPUT DATA -->
+<div class="offcanvas offcanvas-start w-100 h-100" tabindex="-1" id="formData">
+  <div class="offcanvas-body d-flex justify-content-center flex-column">
+    <div class="card mb-2">
+      <div class="card-header text-bg-info">
+        <div class="d-flex justify-content-between mb-2">
+          <h5 class="fw-bold">Input Data</h5>
+          <button class="btn btn-sm bg-info-subtle" onclick="sharePDF()">Share <i class="bi bi-share ms-2"></i></button>
+        </div>
+        
+        <div class="d-flex justify-content-between border p-1">
+          <button id="delSheet" type="button" class="btn btn-sm bg-info-subtle" onclick="delSheet()">Hapus semua data</button>
+          <div id="user" class="fw-bold fs-4 me-2" onclick="unlockSheet()"></div>
         </div>
       </div>
-      <!--body-->
-      <div class="card-body">
-        <div class="table-responsive"></div>
+      <div class="card-body bg-info-subtle">
+        <div class="form-group mb-1">
+          <input type="hidden" id="row">
+          <label class="form-label">Tanggal</label>
+          <input type="text" id="date" class="form-control form-control-sm text-center">
+        </div>
+        <div class="form-group d-flex justify-content-between mb-1">
+          <label class="form-label">Periode</label>
+          <input type="number" id="week" class="form-control form-control-sm w-50" list="weekList">
+          <datalist id="weekList"></datalist>
+        </div>
+        <div class="form-group mb-1">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="work">
+            <label class="form-check-label">Bekerja</label>
+          </div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="over">
+            <label class="form-check-label">Overtime</label>
+          </div>
+        </div>
+        <div class="form-group d-flex justify-content-between mb-1">
+          <label class="form-label">Upah</label>
+          <input type="number" id="wages" class="form-control form-control-sm w-50" list="wagesList">
+          <datalist id="wagesList"></datalist>
+        </div>
+        <div class="form-group d-flex justify-content-between mb-1">
+          <label class="form-label">Kasbon</label>
+          <input type="number" id="debt" class="form-control form-control-sm w-50">
+        </div>
+        <div class="form-group d-flex justify-content-between mb-1">
+          <label class="form-label">Dibayar</label>
+          <input type="number" id="pays" class="form-control form-control-sm w-50">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Deskripsi</label>
+          <textarea id="desc" class="form-control" style="height:100px"></textarea>
+        </div>
       </div>
-      <!--footer-->
-      <div class="card-footer">
-        <div class="d-flex justify-content-between">
-          <button type="button" class="btn btn-sm btn-outline-dark" onclick="loadForm('new')">NEW</button>
-          <select id="select" class="form-select form-select-sm w-50 mx-2"></select>
-          <button id="add" type="button" class="btn btn-sm btn-outline-dark d-none" >ADD</button>
+      <div class="card-footer  bg-dark-subtle py-3">
+        <div class="d-flex justify-content-between mb-3">
+          <button id="del" type="button" class="btn btn-sm btn-danger px-2 d-none" onclick="delRow()"><i class="bi bi-trash me-2"></i>Hapus</button>
+          <button class="btn btn-sm btn-dark px-2" onclick="resetForm()"><i class="bi bi-gear me-2"></i>Reset</button>
+          <button id="add" class="btn btn-sm btn-success px-2 w-50" onclick="saveRow()"><i class="bi bi-floppy me-2"></i>Simpan</button>
         </div>
-        <div class="my-2">
-          <button id="pdf" type="button" class="btn btn-sm btn-outline-dark d-none" onclick="printPDF()">PDF</button>
-        </div>
+        <button class="btn btn-sm btn-primary px-2" onclick="toggleFormSheet()"><i class="bi bi-pencil-square me-1"></i> Buat  Data Baru</button>
       </div>
     </div>
   </div>
-  <!-- javaScript -->
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/sweetalert.min.js"></script>
-  <script src="js/html2canvas.min.js"></script>
-  <script src="js/jspdf.umd.min.js"></script>
-  <script>
-    var scriptUrl = 'https://script.google.com/macros/s/AKfycbyBd7Ix3evs_u9oVE9_2DuVpSPSN2315vZLxmBA2SP-3vE5UQEkd9eAaCcw39dwwjwhuA/exec';
+</div>
+
+<!-- OFFCANVAS INPUT SHEET-->
+<div class="offcanvas offcanvas-start w-100 h-100" tabindex="-1" id="formSheet">
+  <div class="offcanvas-body d-flex justify-content-center flex-column">
+    <div class="card">
+      <div class="card-header text-bg-info">
+        <h5 class="fw-bold">Data Baru</h5>
+      </div>
+      <div class="card-body bg-info-subtle">
+        <div class="form-group mb-2">
+          <label class="form-label">Nama lengkap</label>
+          <input type="text" id="username" class="form-control text-center" oninput="this.value = this.value.replace(/\b\w/g, c => c.toUpperCase())">
+        </div>
+      </div>
+      <div class="card-footer text-center bg-dark-subtle">
+        <button class="btn btn-sm btn-primary px-2 mb-3" onclick="addSheet()"><i class="bi bi-floppy me-2"></i>Simpan  Data Baru</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JAVA SCRIPT -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/sweetalert.min.js"></script>
+<script src="js/html2canvas.min.js"></script>
+<script src="js/jspdf.umd.min.js"></script>
+<!-- fungsi floatBtn -->
+<script>
+const btn = document.getElementById('floatBtn');
+btn.style = 'position: fixed; width: 56px; height: 56px; border-radius: 50%; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: grab; z-index: 9999; transition: left .25s ease, top .25s ease, transform .15s;box-shadow: 0rem 2rem 3rem#000!important;#floatBtn:active{cursor: grabbing; transform: scale(.92);';
+const KEY = 'floatBtnPos';
+let drag=false, ox=0, oy=0;
+const loadPos=()=>{
+  const p=JSON.parse(localStorage.getItem(KEY));
+  if(p){ btn.style.left=p.x+'px'; btn.style.top=p.y+'px'; }
+  else{ btn.style.right='20px'; btn.style.bottom='20px'; }
+};
+const savePos=()=>{
+  const r=btn.getBoundingClientRect();
+  localStorage.setItem(KEY,JSON.stringify({x:r.left,y:r.top}));
+};
+const start=e=>{
+  drag=true; btn.style.transition='none';
+  const r=btn.getBoundingClientRect();
+  const x=e.touches?e.touches[0].clientX:e.clientX;
+  const y=e.touches?e.touches[0].clientY:e.clientY;
+  ox=x-r.left; oy=y-r.top;
+};
+const move=e=>{
+  if(!drag) return;
+  e.preventDefault();
+  const x=e.touches?e.touches[0].clientX:e.clientX;
+  const y=e.touches?e.touches[0].clientY:e.clientY;
+  btn.style.left=(x-ox)+'px';
+  btn.style.top =(y-oy)+'px';
+  btn.style.right='auto';
+  btn.style.bottom='auto';
+};
+const end=()=>{
+  if(!drag) return; drag=false;
+  const r=btn.getBoundingClientRect();
+  const vw=innerWidth, vh=innerHeight;
+  const x=r.left<vw/2 ? 10 : vw-r.width-10;
+  let y=Math.max(10,Math.min(vh-r.height-10,r.top));
+  btn.style.transition='left .25s, top .25s';
+  btn.style.left=x+'px'; btn.style.top=y+'px';
+  savePos();
+};
+btn.addEventListener('mousedown',start);
+document.addEventListener('mousemove',move);
+document.addEventListener('mouseup',end);
+btn.addEventListener('touchstart',start,{passive:false});
+document.addEventListener('touchmove',move,{passive:false});
+document.addEventListener('touchend',end);
+btn.addEventListener('click', () => {
+  if(drag) return;
+  //* isi fungsi klick ..
+  toggleOffCanvas();
+});
+document.addEventListener('DOMContentLoaded',loadPos);
+</script>
+<script>
+/* == KONSTANTA & HELPER == */
+const url = 'https://script.google.com/macros/s/AKfycbwso55JoQEqBTgKoIIB8NdDQNuk-KdcedP1Qb5tooUVIbSC_9ZzD2-3QY2uEq8ORZ0W/exec';
+const $ = id => document.getElementById(id);
+const num = v => Number(v) || 0;
+const isTrue = v => v === true || v === 'TRUE' || v === 'true' || v === 1 || v === '1';
+
+const times = new Date().toLocaleDateString('id-ID', {weekday: 'long',day: '2-digit',month: 'short',year: 'numeric'});
+
+/* == STATE == */
+const state = {
+  sheet : '',
+  week  : '',
+  data  : [],
+  view  : [],
+  locked: false
+};
+
+/* == UTIL == */
+function weekFromDate(dateStr){
+  if(!dateStr) return '';
+  const d = new Date(dateStr);
+  return isNaN(d) ? '' : Math.ceil(d.getDate() / 7);
+}
+
+
+/* == SWEETALERT LOADING == */
+const showLoading = () => {
+  Swal.fire({
+    title:'Loading...',
+    allowOutsideClick:false,
+    showConfirmButton:false,
+    didOpen: () => Swal.showLoading()
+  });
+};
+const hideLoading = () => Swal.close();
+
+/* == LOAD SHEET LIST == */
+function unlockSheet(){
+  state.locked = !state.locked;
+  if(state.locked){
+    user.textContent =`🔒 ${state.sheet}`;
+    Swal.fire({icon:'success', text:'Data ini berhasil dikunci'});
+  }else{
+    user.textContent = state.sheet;
+    Swal.fire({icon:'success', text:'Data ini tidak terkunci'});
+  }
+}
+
+async function loadSheets(){
+  showLoading();
+  try{
+    const r = await fetch(url+'?'+new URLSearchParams({action:'getSheets'})).then(r=>r.json());
     
-    window.addEventListener('load',loadSheet,true)
+    if(!r.data.length){
+      hideLoading();
+      const c = await Swal.fire({icon:'warning',text:'Data kosong, Silakan input data'});
+      if(!c.isConfirmed) return;
+      bootstrap.Offcanvas.getOrCreateInstance(formSheet).show();
+      
+    }
     
-    function loading(){
-      Swal.fire({
-        title: 'Loading...',
-        text: 'Please wait',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
-          Swal.showLoading();
+    sheetSelect.innerHTML =
+      `<option disabled selected>Pilih Data</option>` +
+      (r.data||[]).map(v=>`<option>${v}</option>`).join('');
+
+    sheetSelect.onchange = async () => {
+      if(state.sheet && state.locked){
+        const c = await Swal.fire({icon:'question',text:'Anda akan beralih data ?',showCancelButton:true,});
+        if(!c.isConfirmed){
+          sheetSelect.value = state.sheet;
+          return;
         }
-      });
-    } 
-    
-    function message(data){
-      Swal.close();
-      Swal.fire({ text: data, allowOutsideClick: true, showConfirmButton: false })
-    }
-    
-    function loadSheet(){
-      loading();
-      document.getElementById('timestamp').textContent = new Date().toLocaleString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-      var select = document.getElementById('select');
-      fetch(scriptUrl)
-      .then(response => response.json())
-      .then(data => {
-        select.innerHTML='<option>Buka data</option>';
-        data.splice(1).forEach(sh=> {
-          var option = document.createElement('option');
-          option.textContent = sh;
-          select.appendChild(option);
-        });
-        select.addEventListener('change',function(){optiSheet(this.value);});
-        Swal.close();
-      })
-      .catch(error => message(error));  
-    }
-    
-    function optiSheet(name){
-      Swal.fire({
-        icon: 'question',
-        title: 'Pilih Aksi',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Buka',
-        denyButtonText: 'Hapus',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          loading();
-          loadData(name);
-        } else if (result.isDenied) {
-          Swal.fire({
-            title: 'Hapus Data',
-            text: 'Apakah Anda yakin ingin menghapus data ini?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Hapus',
-            confirmButtonColor: '#dc3545',
-            cancelButtonText: 'Batal'
-          }).then((result) => {
-            if (result.value) {
-              loading();
-              fetch(scriptUrl, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: `action=del_sheet&name=${name}`
-              })
-              .then(response => response.text())
-              .then(data => {
-                message(data);
-                loadData(name);
-              })
-              .catch(error => {
-                message(error);
-                Swal.close();
-              });
-            }
-          });
-        }
-      });
-    }
-    
-    
-    function loadData(key) {
-      let html = '';
-      fetch(`${scriptUrl}?keyword=${encodeURIComponent(key)}`).then(res => res.json()).then(data => {
-    
-        let works  = data.filter(a => a.work).length;
-        let overs  = data.filter(a => a.over).length;
-        let wages  = data.reduce((sum, a) => sum + (parseInt(a.wages) || 0), 0);
-        let debet  = data.reduce((sum, a) => sum + (parseInt(a.debt)  || 0), 0);
-        let credit = data.reduce((sum, a) => sum + (parseInt(a.pays)  || 0), 0);
-        let saldo = wages - (debet + credit);
-        
-        html += `<div id="title" class="fs-2 fw-bold text-primary">${key}</div><div class="fw-bold text-start">absensi kerja</div><table class="my-2"><thead><tr> <th rowspan="2">No</th><th rowspan="2">Tanggal</th><th colspan="2">Status</th> <th rowspan="2">Upah</th></tr><tr style="font-size:0.35rem"><th>kerja</th><th>over<br>time</th></tr></thead>`;
-        
-        data.filter(a => a.work >0 || a.over >0).forEach((a, i) => {
-          html += `<tbody><tr><td>${i + 1}</td><td onclick="actions('add','${key}',['${a.date}','${a.work}','${a.over}','${a.wages}','${a.debt}','${a.pays}','${a.desc}'])">${a.date}</td><td><input type="checkbox" ${a.work ? 'checked' : ''}  disabled/></td><td><input type="checkbox" ${a.over ? 'checked' : ''} ${a.over >0 ? `onclick="message('${a.desc}')"` : ''} disabled/></td><td class="${a.wages > 0 ? 'text-end pe-1' : 'text-transparent'}" ${a.over >0 ? `onclick="message('${a.desc}')"` : ''}>${a.wages}</td></tr></tbody>`;
-        });
-        html += `<tfoot><tr class="text-danger"><th colspan="2" class="text-end pe-1">=></th><th>${works}</th><th>${overs}</th><th class="text-end pe-1">${wages}</th></tr></tfoot></table>`;
-        
-        html += `<div class="fw-bold text-start">transaksi upah</div><table class="my-2"><thead><tr><th>No</th><th>Tanggal</th><th>Kasbon</th><th>Dibayar</th></tr></thead>`;
-        
-        data.filter(a => a.debt > 0 || a.pays > 0).forEach((a, i) => {
-          html += `<tbody><tr ${a.debt > 0 || a.pays >0 ? `onclick="message('${a.desc}')"` : ''}><td>${i + 1}</td><td>${a.date}</td><td class="${a.debt > 0 ? 'text-end pe-1' : 'text-transparent'}">${a.debt}</td><td class="${a.pays > 0 ? 'text-end pe-1' : 'text-transparent'}">${a.pays}</td></tr></tbody>`;
-        });
-        html += `
-        <tfoot><tr class="text-danger"><th colspan="2" class="text-end pe-1">=></th><th class="text-end pe-1">${debet}</th><th class="text-end pe-1">${credit}</th></tr>
-        <tr><th colspan="2" class="text-start ps-2 pt-3">bekerja</th><td class="text-end pe-2 pt-3">${works} hari</td></tr>
-        <tr><th colspan="2" class="text-start ps-2">overtime</th><td class="text-end pe-2">${overs} kali</td></tr>
-        <tr><th colspan="2" class="text-start ps-2">Total Upah</th><td class="text-end pe-2">${wages}</td></tr>
-        <tr><th colspan="2" class="text-start ps-2">Total kasbon</th><td class="text-end pe-2">${debet}</td></tr>
-        <tr><th colspan="2" class="text-start ps-2">Total dibayar</th><td class="text-end pe-2">${credit}</td></tr>
-        <tr style="font-size: 1rem;"><th colspan="3" class="${saldo !== 0 ? 'text-danger' : 'text-center font-monospace text-info py-2'}">${saldo > 0 ? `Upah Sisa : ${saldo}` : saldo < 0 ? `Upah Minus : ${Math.abs(saldo)}`: 'Lunas !.'}</th></tr>
-        </tfoot></table>`;
-        
-        const table = document.querySelector('.table-responsive');
-        table.innerHTML = html;
-        const add = document.querySelector('#add');
-        const pdf = document.querySelector('#pdf');
-        [add,pdf].forEach(el=>{el.classList.remove('d-none')});
-        add.onclick=()=> loadForm('add',key);
-        Swal.close();
-      }).catch(err => loadInfo(err));
-    }
-    
-    function loadForm(type, name, index=''){
-      let action = index ? 'set' : 'add';
-      if(type === 'new'){
-        Swal.fire({
-          title: 'New Data',
-          html: `
-          <input type="text" id="name" name="name" class="form-control text-center" required>`,
-          focusConfirm: false,
-          showCancelButton: true,
-          confirmButtonText: 'Simpan',
-          confirmButtonColor: '#198754',
-          cancelButtonText: 'Batal',
-          preConfirm: () => {
-            return { name: document.getElementById('name').value
-            }
-          }
-          }).then((result) => {
-          if (result.value) {
-            loading();
-            fetch(scriptUrl, {
-              method: 'POST',
-              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-              body: `action=sheet&name=${result.value.name}`
-            })
-            .then(response => response.text())
-            .then(data => {
-              message(data);
-              loadSheet();
-            })
-            .catch(error => message(error));
-          }
-        });
-      }else if(type === 'add'){
-        Swal.fire({
-          title: name,
-          html: ` 
-          <div class="text-start">
-          <div class="d-flex justify-content-between align-items-start my-1">
-            <label class="fw-bold">Tanggal</label>
-            <input type="text" id="date" class="form-control form-control-sm text-center w-50" value="${index ? index[0] : new Date().toLocaleString('id-ID')}" required>
-          </div>
-          <label class="fw-bold">Status Kerja</label>
-          <div class="d-flex justify-content-between align-items-start my-1">
-            <label class="ps-2">Bekerja</label>
-            <input type="text" id="work" class="form-control form-control-sm text-center w-50" list="true/false" value="${index ? index[1] : 'false'}" onclick="document.getElementById('work').value=null">
-          </div>
-          <div class="d-flex justify-content-between align-items-start my-1">
-            <label class="ps-2">Overtime</label>
-            <input type="text" id="over" class="form-control form-control-sm text-center w-50" list="true/false" value="${index ? index[2] : 'false'}" onclick="document.getElementById('over').value=null">
-          </div>
-          <div class="d-flex justify-content-between align-items-start my-1">
-            <label class="fw-bold">Upah Harian</label>
-            <input type="number" id="wages" class="form-control form-control-sm text-center w-50" list="listwages" value="${index ? index[3] : ''}">
-          </div>
-          <label class="fw-bold">Transaksi Upah</label>
-          <div class="d-flex justify-content-between align-items-start my-1">
-            <label class="ps-2">Kasbon</label>
-            <input type="number" id="debt" class="form-control form-control-sm text-center w-50" value="${index ? index[4] : ''}">
-          </div>
-          <div class="d-flex justify-content-between align-items-start my-1">
-            <label class="ps-2">Dibayar</label>
-            <input type="number" id="pays" class="form-control form-control-sm text-center w-50" value="${index ? index[5] : ''}">
-          </div>
-          <label class="fw-bold">Deskripsi</label>
-          <textarea name="desc" id="desc" class="form-control form-control-sm" onclick="empty('desc')">${index ? index[6] : ''}</textarea>
-          <datalist id="true/false">
-            <option>true</option>
-            <option>false</option>
-          </datalist>
-          <datalist id="listwages"></datalist></div>`,
-          focusConfirm: false,
-          showCancelButton: true,
-          confirmButtonText: 'Simpan',
-          confirmButtonColor: '#198754',
-          cancelButtonText: 'Batal',
-          didOpen: () => {
-            var list = document.getElementById('listwages');
-            fetch(`${scriptUrl}?keyword=${encodeURIComponent(name)}`)
-              .then(response => response.json())
-              .then(data => {
-                var listwages = [];
-                data.forEach((a)=>{
-                  if (a.wages !== 0 && !listwages.includes(a.wages)) {
-                    listwages.push(a.wages);
-                    var opt = document.createElement('option');
-                    opt.textContent = a.wages;
-                    list.appendChild(opt);
-                  }
-                })
-              }).catch(error => console.error(error));
-          },
-          preConfirm: () => {
-            return {
-              name: name,
-              date: document.getElementById('date').value,
-              work: document.getElementById('work').value,
-              over: document.getElementById('over').value,
-              wages: document.getElementById('wages').value || 0,
-              debt: document.getElementById('debt').value || 0,
-              pays: document.getElementById('pays').value || 0,
-              desc: document.getElementById('desc').value
-            }
-          }
-        }).then((result) => {
-          if (result.value) {
-            loading();
-            fetch(scriptUrl, {
-              method: 'POST',
-              headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-              body: `action=${action}&name=${result.value.name}&date=${result.value.date}&work=${result.value.work}&over=${result.value.over}&wages=${result.value.wages}&debt=${result.value.debt}&pays=${result.value.pays}&desc=${result.value.desc}`
-            })
-            .then(response => response.text())
-            .then(data => {
-              message(data);
-              Swal.close();
-              loadData(name);
-            })
-            .catch(error => {
-              message(error);
-              Swal.close();
-            });
-          }
-        });
       }
-    }
+
+      state.sheet  = sheetSelect.value;
+      state.week   = '';
+      state.locked = true;
+      user.textContent = `🔒 ${state.sheet}`;
+      loadData();
+    };
+
+    datestamp.textContent = times;
+    date.value = times;
+
+  }catch(err){
+    Swal.fire({icon:'error',text:err.message||err});
+  }finally{
+    hideLoading();
+  }
+}
+
+/* == SHEET CRUD == */
+async function addSheet(){
+  if(!username.value) return Swal.fire({icon:'warning', text: '👋 Ops !.. Silakan masukan data',});
+  const name=username.value.trim();
+  bootstrap.Offcanvas.getOrCreateInstance(formSheet).hide();
+  await fetch(url,{method:'POST',body:new URLSearchParams({action:'add_sheet',name})});
+  state.sheet=name;
+  state.locked=true;
+  user.textContent=`🔒 ${name}`;
+  bootstrap.Offcanvas.getOrCreateInstance(formData).show();
+  loadSheets();
+}
+
+async function delSheet(){
+  if(state.locked) return Swal.fire({icon:'warning',text: '👋 Ops !.. Data terkunci, Silakan buka dulu.'});
+  if(!state.sheet) return;
+
+  const c=await Swal.fire({icon:'warning',title:'Hapus',text:`Yakin mau hapus semua data ${state.sheet} ?`,showCancelButton:true,confirmButtonText:'Ya, Hapus'});
+  if(!c.isConfirmed) return;
+  bootstrap.Offcanvas.getOrCreateInstance(formData).hide();
+  await fetch(url,{method:'POST',body:new URLSearchParams({action:'del_sheet',name:state.sheet})});
+  state.sheet='';
+  state.locked=false;
+  table.innerHTML='';
+  loadSheets();
+}
+
+/* == LOAD DATA == */
+async function loadData(){
+  if(!state.sheet) return;
+  showLoading();
+
+  const r = await fetch(
+    url+'?'+new URLSearchParams({action:'getData',sheet:state.sheet})
+  ).then(r=>r.json());
+
+  state.data = Array.isArray(r.data) ? r.data : [];
+  state.view = [...state.data];
+
+  const weeks = [...new Set(
+    state.data.map(d=>Number(d.week)).filter(v=>!isNaN(v))
+  )].sort((a,b)=>b-a);
+
+  selectWeek.innerHTML =
+    `<option value="">Semua Periode</option>` +
+    weeks.map(w=>`<option value="${w}">Periode ${w}</option>`).join('');
+
+  weekList.innerHTML = weeks.map(w=>`<option value="${w}">${w}</option>`).join('');
+
+  selectWeek.onchange = e=>{
+    const val = Number(e.target.value);
+    state.week = val||'';
+    state.view = val
+      ? state.data.filter(d=>Number(d.week)===val)
+      : [...state.data];
+
+    datestamp.textContent = val
+      ? state.view.map(d=>d.date).filter(Boolean).sort((a,b)=>new Date(a)-new Date(b)).pop() || times
+      : times;
+
+    renderTable();
+  };
+  
+  const wages = [...new Set(
+    state.data.map(d=>Number(d.wages)).filter(v=>!isNaN(v))
+  )].sort((a,b)=>b-a);
+  
+  wagesList.innerHTML = wages.map(w=>`<option value="${w}">${w}</option>`).join('');
+  
+  renderTable();
+}
+
+/* == RENDER TABLE == */
+async function renderTable(){
+  table.innerHTML = '';
+  if(!state.view.length){
+    hideLoading();
+    const c = await Swal.fire({icon:'warning',text:'Data kosong, Silakan input data'});
+    if(!c.isConfirmed) return;
+    bootstrap.Offcanvas.getOrCreateInstance(formData).show();
+  }
+
+  const sum = k => state.view.reduce((s,a)=>s+(+a[k]||0),0);
+  const saldo = sum('wages') - (sum('debt') + sum('pays'));
+
+  table.innerHTML = `
+  <thead><tr class="text-center">
+    <th rowspan="2">No</th>
+    <th rowspan="2">Tanggal</th>
+    <th colspan="2">Status</th>
+    <th rowspan="2">Upah</th>
+    <th colspan="2">Transaksi</th>
+  </tr><tr class="text-center">
+    <th class="tiny">Kerja</th>
+    <th class="tiny">Over<br>time</th>
+    <th class="small">Kasbon</th>
+    <th class="small">Dibayar</th>
+  </tr></thead><tbody>`;
+  table.innerHTML += state.view.map((a,i)=>{
+    const desc = a.desc && a.desc.trim();
+    return `
+    <tr class="text-end pe-2" onclick="editRow(${i})">
+      <th rowspan="${desc ? 2:1}">${i+1}</th>
+      <td class="small text-start ps-2">${String(a.date)||'-'}</td>
+      <td class="text-center">${a.work?'✔':''}</td>
+      <td class="text-center">${a.over?'✔':''}</td>
+      <td>${a.wages||''}</td>
+      <td>${a.debt||''}</td>
+      <td>${a.pays||''}</td>
+    </tr>${a.desc?`<tr>
+      <th colspan="6"  class="tiny text-start ps-2"><i>${a.desc}</i></th>
+    </tr>` : '' }`}).join('');
     
-    function actions(type, name, index){
-      Swal.fire({
-        icon: 'question',
-        title: 'Pilih Aksi',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Edit',
-        denyButtonText: 'Hapus',
-        cancelButtonText: 'Batal'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          loadForm(type, name, index)
-        } else if (result.isDenied) {
-          Swal.fire({
-            title: 'Hapus Data',
-            text: 'Apakah Anda yakin ingin menghapus data ini?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Hapus',
-            confirmButtonColor: '#dc3545',
-            cancelButtonText: 'Batal'
-          }).then((result) => {
-            if (result.value) {
-              loading();
-              fetch(scriptUrl, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: `action=del&name=${name}&date=${index[0]}`
-              })
-              .then(response => response.text())
-              .then(data => {
-                message(data);
-                loadData(name);
-              })
-              .catch(error => {
-                message(error);
-                Swal.close();
-              });
-            }
-          });
-        }
-      });
-    }
-    
-    function printPDF() {
-      const title = document.getElementById('select').value;
-      const target = document.querySelector('.card-body'); // FIX selector
-    
-      if (!target || !target.innerHTML.trim()) {
-        Swal.fire({
-          icon: 'warning',
-          text: 'Data belum ditampilkan'
-        });
-        return;
-      }
-    
-      Swal.fire({
-        title: 'Membuat PDF...',
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        didOpen: () => Swal.showLoading()
-      });
-    
-      html2canvas(target, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: '#ffffff'
-      }).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-    
-        const pageWidth  = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
-    
-        const imgWidth = pageWidth - 20;
-        const imgHeight = canvas.height * imgWidth / canvas.width;
-    
-        let y = 10;
-        let heightLeft = imgHeight;
-    
-        pdf.addImage(imgData, 'PNG', 10, y, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-    
-        while (heightLeft > 0) {
-          y = heightLeft - imgHeight + 10;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', 10, y, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-        }
-    
-        Swal.close();
-        pdf.save(`${title}.pdf`);
-      }).catch(err => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Gagal',
-          text: err.message || err
-        });
-      });
-    }
-  </script>
+  table.innerHTML += `
+  </tbody><tfoot><tr class="text-end pe-2">
+    <th colspan="3">${state.view.filter(a=>a.work).length}</th>
+    <th>${state.view.filter(a=>a.over).length}</th>
+    <th>${sum('wages')}</th>
+    <th>${sum('debt')}</th>
+    <th>${sum('pays')}</th>
+  </tr><tr class="text-end pe-2">
+    <th colspan="5">${saldo>0?'SISA':saldo<0?'MINUS':'LUNAS'}</th>
+    <th colspan="2">${saldo!==0?Math.abs(saldo):'✔'}</Math>
+  </tr></tfoot>`;
+  hideLoading();
+}
+
+/* == CRUD ROW == */
+function toggleOffCanvas(){
+  resetForm();
+  if(!state.sheet){
+    bootstrap.Offcanvas.getOrCreateInstance(formSheet).toggle();
+    bootstrap.Offcanvas.getOrCreateInstance(formData).hide();
+  }else{
+  bootstrap.Offcanvas.getOrCreateInstance(formData).toggle();
+  };
+}
+
+function toggleFormSheet(){
+  state.sheet = '';
+  table.innerHTML ='';
+  loadSheets();
+  bootstrap.Offcanvas.getOrCreateInstance(formSheet).show();
+  bootstrap.Offcanvas.getOrCreateInstance(formData).hide();
+  resetForm();
+}
+
+async function editRow(i){
+  const d = state.view[i];
+  const real = state.data.indexOf(d);
+  
+  Object.keys(d).forEach(k=>{
+    const el=$(k);
+    if(!el) return;
+    el.type==='checkbox' ? el.checked=isTrue(d[k]) : el.value=d[k];
+  });
+  
+  row.value = real+2;
+  add.innerHTML='Update';
+  del.classList.remove('d-none');
+  bootstrap.Offcanvas.getOrCreateInstance(formData).show();
+}
+
+async function saveRow(){
+  bootstrap.Offcanvas.getOrCreateInstance(formData).hide();
+  const autoWeek = week.value || weekFromDate(date.value);
+  
+  const r = await fetch(url,{
+    method:'POST',
+    body:new URLSearchParams({
+      action: row.value?'set_row':'add_row',
+      name  : state.sheet,
+      row   : row.value,
+      date  : `'`+date.value || `'`+times,
+      week  : autoWeek,
+      work  : work.checked,
+      over  : over.checked,
+      wages : num(wages.value),
+      debt  : num(debt.value),
+      pays  : num(pays.value),
+      desc  : desc.value
+    })
+  }).then(r=>r.json());
+
+  Swal.fire({icon:r.status?'success':'error',text:r.msg});
+  resetForm();
+  loadData();
+}
+
+async function delRow(){
+  if(!row.value) return Swal.fire({icon:'warning',text:'Data belum dipilih'});
+  const c = await Swal.fire({icon:'warning',text:'Yakin mau hapus baris ini.?',showCancelButton:true,confirmButtonText:'Ya, Hapus'});
+  if(!c.isConfirmed) return;
+  bootstrap.Offcanvas.getOrCreateInstance(formData).hide();
+  await fetch(url,{method:'POST',body:new URLSearchParams({
+    action:'del_row',name:state.sheet,row:row.value
+  })});
+  resetForm();
+  loadData();
+}
+
+function resetForm(){
+  row.value=''; date.value=times; week.value=''; wages.value=debt.value=pays.value=desc.value=''; work.checked=over.checked=false; username.value=''; del.classList.add('d-none');
+}
+
+
+/* == SHARE PDF == */
+async function sharePDF(){
+  const off = bootstrap.Offcanvas.getOrCreateInstance(formData);
+  const toggle = document.getElementById('floatBtn');
+  const table  = document.getElementById('table');
+  const target = document.querySelector('.container');
+
+  off.hide();
+
+  if(!target || !target.innerHTML.trim()){
+    Swal.fire({icon:'warning',text:'Data belum ditampilkan'});
+    return;
+  }
+
+  if(!navigator.canShare){
+    Swal.fire({icon:'error',text:'System tidak mendukung'});
+    return;
+  }
+
+  toggle?.classList.add('d-none');
+  table?.classList.add('small');
+
+  showLoading();
+
+  try{
+    const canvas = await html2canvas(target,{
+      scale:2,
+      useCORS:true,
+      backgroundColor:'#fff'
+    });
+
+    const pdf = new jspdf.jsPDF('p','mm','a4');
+    const w = pdf.internal.pageSize.getWidth() - 20;
+    const h = canvas.height * w / canvas.width;
+
+    pdf.addImage(canvas,'PNG',10,10,w,h);
+
+    const file = new File(
+      [pdf.output('blob')],
+      `${state.sheet}.pdf`,
+      {type:'application/pdf'}
+    );
+
+    await navigator.share({
+      title: state.sheet,
+      text: `Laporan ${state.sheet}`,
+      files: [file]
+    });
+
+  }catch(err){
+    Swal.fire({icon:'error',title:'Gagal Share',text:err.message||err});
+  }finally{
+    hideLoading();
+    toggle?.classList.remove('d-none');
+    table?.classList.remove('small');
+  }
+}
+/* ==INIT == */
+document.addEventListener('DOMContentLoaded', loadSheets);
+
+</script>
 </body>
 </html>
